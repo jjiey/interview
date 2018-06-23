@@ -13,4 +13,19 @@ public class TreeCreator {
         return root;
     }
 
+    public TreeNode createTree(String preOrder, String inOrder){
+        if(preOrder.isEmpty()){
+            return null;
+        }
+
+        char rootValue = preOrder.charAt(0);
+        int rootIndex = inOrder.indexOf(rootValue);
+
+        TreeNode root = new TreeNode(rootValue);
+        root.setLeft(createTree(preOrder.substring(1, 1 + rootIndex), inOrder.substring(0, rootIndex)));
+        root.setRight(createTree(preOrder.substring(1 + rootIndex), inOrder.substring(1 + rootIndex)));
+
+        return root;
+    }
+
 }
