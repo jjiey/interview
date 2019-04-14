@@ -1,11 +1,10 @@
 package interview.loop;
 
 import interview.common.Node;
-import interview.recursion.LinkedListCreator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+/**
+ * 循环反转链表
+ */
 public class LinkedListReverser {
 
     public Node reverseLinkedList(Node head){
@@ -28,30 +27,20 @@ public class LinkedListReverser {
         return newHead;
     }
 
-    public Node createLargeLinkedList(int size){
-        Node prev = null;
-        Node head = null;
-        for(int i = 1; i <= size; i ++){
-            Node node = new Node(i);
-            if(prev != null){
-                prev.setNext(node);
-            }else{
-                head = node;
-            }
-            prev = node;
-        }
-        return head;
-    }
+
 
 
     public static void main(String[] args) {
         LinkedListCreator creator = new LinkedListCreator();
         LinkedListReverser reverser = new LinkedListReverser();
 
-        Node.printLinkedList(reverser.reverseLinkedList(creator.createLinkedList(new ArrayList<>())));
-        Node.printLinkedList(reverser.reverseLinkedList(creator.createLinkedList(Arrays.asList(1))));
-        Node.printLinkedList(reverser.reverseLinkedList(creator.createLinkedList(Arrays.asList(1,2,3,4,5))));
-        reverser.reverseLinkedList(reverser.createLargeLinkedList(1000000));
+//        Node.printLinkedList(reverser.reverseLinkedList(creator.createLinkedList(new ArrayList<>())));
+//        Node.printLinkedList(reverser.reverseLinkedList(creator.createLinkedList(Arrays.asList(1))));
+//        Node.printLinkedList(reverser.reverseLinkedList(creator.createLinkedList(Arrays.asList(1,2,3,4,5))));
+        Node.printLinkedList(reverser.reverseLinkedList(creator.createLargeLinkedList(0)));
+        Node.printLinkedList(reverser.reverseLinkedList(creator.createLargeLinkedList(1)));
+        Node.printLinkedList(reverser.reverseLinkedList(creator.createLargeLinkedList(5)));
+        reverser.reverseLinkedList(creator.createLargeLinkedList(1000000));
     }
 
 }

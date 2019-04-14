@@ -6,9 +6,13 @@ import interview.recursion.LinkedListCreator;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * 链表循环删除指定值的节点
+ */
 public class LinkedListDeletor {
 
     public Node deleteIfEquals(Node head, int value) {
+        //注意这里是while，连续处理头节点
         while (head != null && head.getValue() == value) {
             head = head.getNext();
         }

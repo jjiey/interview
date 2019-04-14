@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 列出所有组合
+ */
 public class Combinations {
 
     /**
@@ -29,10 +32,19 @@ public class Combinations {
 
         // select element 0
         selected.add(data.get(0));
+        System.out.println("===================+++");
+        selected.forEach(i -> System.out.print(i + " "));
+        System.out.println();
         combinations(selected, data.subList(1, data.size()), n-1);
 
         // un-select element 0
         selected.remove(selected.size() - 1);
+        System.out.println("===================---");
+        selected.forEach(i -> System.out.print(i + " "));
+        System.out.print("   从 ");
+        data.forEach(i -> System.out.print(i + " "));
+        System.out.print("里选 " + n + " 个");
+        System.out.println();
         combinations(selected, data.subList(1, data.size()), n);
     }
 

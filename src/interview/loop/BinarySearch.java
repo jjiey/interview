@@ -1,5 +1,8 @@
 package interview.loop;
 
+/**
+ * 二分查找
+ */
 public class BinarySearch {
 
     /**
@@ -23,11 +26,11 @@ public class BinarySearch {
             int m = a + (b - a) / 2;
             // b == a + 1: m = a
             // b == a + 2: m = a + 1
-            if(k < arr[m]){
+            if (k < arr[m]){
                 b = m;
-            }else if(k > arr[m]){
+            } else if (k > arr[m]){
                 a = m + 1;
-            }else{
+            } else {
                 return m;
             }
         }

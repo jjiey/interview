@@ -5,6 +5,9 @@ import interview.common.Node;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * 递归反转链表
+ */
 public class LinkedListReverser {
 
     /**
@@ -14,7 +17,7 @@ public class LinkedListReverser {
      */
     public Node reverseLinkedList(Node head){
         // size == 0 or size == 1
-        if(head == null || head.getNext() == null){
+        if (head == null || head.getNext() == null){
             return head;
         }
 
