@@ -5,7 +5,11 @@ import interview.recursion.LinkedListCreator;
 
 import java.util.Arrays;
 
-public class Example {
+/**
+ * 判断单链表是否存在环
+ * 找到有环链表的入口
+ */
+public class Example1 {
 
     /**
      * 判断单链表是否存在环
@@ -68,9 +72,9 @@ public class Example {
         LinkedListCreator creator = new LinkedListCreator();
         Node head = creator.createLinkedList(Arrays.asList(1, 2, 3, 4));
         head.getNext().getNext().getNext().setNext(head.getNext().getNext());
-        Example example = new Example();
-        System.out.println(example.isCyclicList(head));
-        System.out.println(example.findCyclicList(head).getValue());
+        Example1 example1 = new Example1();
+        System.out.println(example1.isCyclicList(head));
+        System.out.println(example1.findCyclicList(head).getValue());
     }
 
 }
