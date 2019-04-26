@@ -4,6 +4,12 @@ import java.util.Arrays;
 
 /**
  * 选择排序
+ * 时间复杂度：
+ * 最好：O(N)
+ * 最坏：O(N^2)
+ * 平均：O(N^2)
+ * 空间复杂度：O(1)
+ * 稳定性：不稳定
  */
 public class SelectionSort {
 

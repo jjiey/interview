@@ -4,6 +4,12 @@ import java.util.Arrays;
 
 /**
  * 归并排序
+ * 时间复杂度：
+ * 最好：O(N*logN)
+ * 最坏：O(N*logN)
+ * 平均：O(N*logN)
+ * 空间复杂度：O(n)
+ * 稳定性：稳定
  */
 public class MergeSort {
 

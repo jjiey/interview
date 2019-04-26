@@ -4,7 +4,12 @@ import java.util.Arrays;
 
 /**
  * 插入排序
- * 时间复杂度O(n^2)
+ * 时间复杂度：
+ * 最好：O(N)
+ * 最坏：O(N^2)
+ * 平均：O(N^2)
+ * 空间复杂度：O(1)
+ * 稳定性：稳定
  */
 public class InsertSort {
 

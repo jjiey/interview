@@ -6,6 +6,12 @@ import java.util.Arrays;
  * 快速排序
  * 概念：基准数
  * 核心是：分组
+ * 时间复杂度：
+ * 最好：O(N*logN)
+ * 最坏：O(N^2)
+ * 平均：O(N*logN)
+ * 空间复杂度：O(logn)~O(n)
+ * 稳定性：不稳定
  */
 public class QuickSort {
 

@@ -5,6 +5,12 @@ import java.util.Arrays;
 /**
  * 希尔排序
  * 概念：步长
+ * 时间复杂度：
+ * 最好：O(N)
+ * 最坏：O(N^2)
+ * 平均：O(N^1.3)
+ * 空间复杂度：O(1)
+ * 稳定性：不稳定
  */
 public class ShellSort {
 
