@@ -1,6 +1,7 @@
 package interview.my;
 
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 /**
  * 斐波那契数列
@@ -180,6 +181,13 @@ public class FibonacciSeq {
         for(int i = 1; i <= num; i ++) System.out.print(getFib8(i) + "\t");
     }
 
+    private static void java8lambda(int num) {
+        Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]})
+                .limit(num)
+                .map(t -> t[1])
+                .forEach(System.out::println);
+    }
+
     public static void main(String[] args) {
 //        printFib1(10);
 //        System.out.println();
@@ -190,6 +198,8 @@ public class FibonacciSeq {
 //        printFib3(10);
 //        System.out.println();
         System.out.println(getFib8(2100000000));
+
+        java8lambda(30);
     }
 
 }
