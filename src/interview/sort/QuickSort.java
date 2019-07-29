@@ -1,6 +1,9 @@
 package interview.sort;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
 /**
  * 快速排序
@@ -12,28 +15,40 @@ import java.util.Arrays;
  * 平均：O(N*logN)
  * 空间复杂度：O(logn)~O(n)
  * 稳定性：不稳定
+ * TODO 优化：随机选择一个元素作为基准元素，并且让基准元素和数列首元素交换位置
  */
 public class QuickSort {
 
-	public static void quickSort(int data[], int left, int right) {
-		int ll = left; // 从左边找的位置
-		int rr = right; // 从右边找的位置
-		int base = data[left]; // 基准数，取第一个作为基准数
+	/**
+	 * quickSort
+	 * @param data
+	 * @param left
+	 * @param right
+	 */
+	private static void quickSort(int[] data, int left, int right) {
+		// 从左边找的位置
+		int ll = left;
+		// 从右边找的位置
+		int rr = right;
+		// 基准数，取第一个作为基准数
+		int base = data[left];
 
-		while (ll < rr) { // 排完的终止条件
+		// 排完的终止条件
+		while (ll < rr) {
 			// 从后面往前找到比基准数小的数进行对换
 			while (ll < rr && data[rr] >= base) { // ll<rr一定要加，否则可能出现死循环或数组越界
 				rr --;
 			}
-			/* 此时会有两种情况：一个是没找到（比如1, 2, 3, 4, 5），一个是找到了 */
-			if (ll < rr) { // 表示找到了
+			/* 此时会有两种情况：一个是没找到（比如1, 2, 3, 4, 5）比基准数小的数，一个是找到了比基准数小的数 */
+			// 表示找到了比基准数小的数
+			if (ll < rr) {
 				// swap
 				int temp = data[rr];
 				data[rr] = data[ll];
 				data[ll] = temp;
 				ll ++;
 			}
-			// 从前面往后面找比基准数大的进行对换，和上边类似
+			// 同上，从前面往后面找比基准数大的进行对换
 			while (ll < rr && data[ll] <= base) {
 				ll ++;
 			}
@@ -45,20 +60,149 @@ public class QuickSort {
 			}
 		}
 		/* 此时ll == rr */
-		System.out.print("以Base = " +base+ "的排序结果：");
+		System.out.print("以Base = " + base + " 的排序结果：");
 		System.out.println(Arrays.toString(data));
-		// 以基准数分为3部分，左边的比基准数小，右边比基准数大。我们要做的就是一把这左边和右边分别进行快速排序
-		if (ll > left) { // 左部分
+		/* 此时以基准数分为3部分，左边的比基准数小，右边比基准数大。我们要做的就是继续把基准数左边和右边分别进行快速排序 */
+		// 基准数左部分
+		if (ll > left) {
 			quickSort(data, left, ll - 1);
 		}
-		if (rr < right) { // 右部分
+		// 基准数右部分
+		if (rr < right) {
 			quickSort(data, ll + 1, right);
 		}
 	}
 
+	/**
+	 * quickSort
+	 * @param data
+	 * @param left
+	 * @param right
+	 */
+	private static void quickSort2(int[] data, int left, int right) {
+		// 递归结束条件
+		if (left >= right) {
+			return;
+		}
+		// 得到基准元素位置
+		/* 双边循环法 */
+//		int pivotIndex = partition1(data, left, right);
+		/* 单边循环法 */
+		int pivotIndex = partition2(data, left, right);
+		// 基准数左部分
+		quickSort2(data, left, pivotIndex - 1);
+		// 基准数右部分
+		quickSort2(data, pivotIndex + 1, right);
+	}
+
+	/**
+	 * quickSort非递归实现
+	 * @param data
+	 * @param left
+	 * @param right
+	 */
+	private static void quickSortNoRecursive(int[] data, int left, int right) {
+		String startIndex = "startIndex";
+		String endIndex = "endIndex";
+		Stack<Map<String, Integer>> quickSortStack = new Stack<>();
+		Map<String, Integer> rootParam = new HashMap<>();
+		rootParam.put(startIndex, left);
+		rootParam.put(endIndex, right);
+		quickSortStack.push(rootParam);
+		while (!quickSortStack.empty()) {
+			Map<String, Integer> param = quickSortStack.pop();
+			/* 双边循环法 */
+			int pivotIndex = partition1(data, param.get(startIndex), param.get(endIndex));
+			/* 单边循环法 */
+//			int pivotIndex = partition2(data, param.get(startIndex), param.get(endIndex));
+			if (param.get(startIndex) < pivotIndex - 1) {
+				Map<String, Integer> leftParam = new HashMap<>();
+				leftParam.put(startIndex, param.get(startIndex));
+				leftParam.put(endIndex, pivotIndex - 1);
+				quickSortStack.push(leftParam);
+			}
+			if (pivotIndex + 1 < param.get(endIndex)) {
+				Map<String, Integer> rightParam = new HashMap<>();
+				rightParam.put(startIndex, pivotIndex + 1);
+				rightParam.put(endIndex, param.get(endIndex));
+				quickSortStack.push(rightParam);
+			}
+		}
+	}
+
+	/**
+	 * 分治：双边循环法
+	 * @param data 待交换的数组
+	 * @param left 起始下标
+	 * @param right 结束下标
+	 * @return 基准数位置
+	 */
+	private static int partition1(int[] data, int left, int right) {
+		// 从左边找的位置
+		int ll = left;
+		// 从右边找的位置
+		int rr = right;
+		// 基准数，取第一个作为基准数
+		int pivot = data[left];
+		// 终止条件
+		while (ll != rr) {
+			// 控制rr指针比较并左移
+			while (ll < rr && data[rr] > pivot) {
+				rr --;
+			}
+			// 控制ll指针比较并右移
+			while (ll < rr && data[ll] <= pivot) {
+				ll ++;
+			}
+			// 找到需要交换的
+			if (ll < rr) {
+				int temp = data[rr];
+				data[rr] = data[ll];
+				data[ll] = temp;
+			}
+		}
+		// 基准数pivot和指针重合点进行交换
+		data[left] = data[ll];
+		data[ll] = pivot;
+		System.out.print("以pivot = " + pivot + " 的排序结果：");
+		System.out.println(Arrays.toString(data));
+		return ll;
+	}
+
+	/**
+	 * 分治：单边循环法
+	 * @param data 待交换的数组
+	 * @param left 起始下标
+	 * @param right 结束下标
+	 * @return 基准数位置
+	 */
+	private static int partition2(int[] data, int left, int right) {
+		// 基准数，取第一个作为基准数
+		int pivot = data[left];
+		// 代表小于基准元素pivot的区域边界
+		int mark = left;
+		for (int i = left + 1; i <= right; i ++) {
+			if (data[i] < pivot) {
+				mark ++;
+				// swap data[mark] and data[i]
+				int temp = data[mark];
+				data[mark] = data[i];
+				data[i] = temp;
+			}
+		}
+		// 基准数pivot和mark进行交换
+		data[left] = data[mark];
+		data[mark] = pivot;
+		System.out.print("以pivot = " + pivot + " 的排序结果：");
+		System.out.println(Arrays.toString(data));
+		return mark;
+	}
+
 	public static void main(String[] args) {
 		int[] data = {45, 28, 80, 90, 50, 16, 100, 10};
-		quickSort(data, 0, data.length - 1);
+//		quickSort(data, 0, data.length - 1);
+//		quickSort2(data, 0, data.length - 1);
+		quickSortNoRecursive(data, 0, data.length - 1);
 	}
 
 }

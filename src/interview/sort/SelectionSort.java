@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class SelectionSort {
 
-    public static void selectionSort(int[] data) {
+    private static void selectionSort(int[] data) {
         int len = data.length;
         for (int i = 0; i < len; i ++) {
             int minIndex = i; // 记录最小值的下标

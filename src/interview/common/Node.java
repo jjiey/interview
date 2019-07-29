@@ -1,8 +1,13 @@
 package interview.common;
 
+/**
+ * 单链表结点
+ */
 public class Node {
 
-    private final int value; //避免用户创建完之后修改
+    // final避免用户创建完之后修改
+    private final int value;
+
     private Node next;
 
     public Node(int value) {

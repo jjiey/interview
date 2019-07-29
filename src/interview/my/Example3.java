@@ -11,7 +11,7 @@ public class Example3 {
      */
     public static boolean isOdd(int num) {
         // 一个数&1的结果就是取二进制的最末位，二进制的最末位为0表示该数为偶数，最末位为1表示该数为奇数
-        return ((num & 1) == 1);
+        return (num & 1) == 1;
     }
 
     /**
@@ -21,7 +21,7 @@ public class Example3 {
      */
     public static boolean powerOf2(int num) {
         // 2的n次方变成二进制后首位为1，其余位都为0
-        return ((num & (num-1)) == 0);
+        return (num & (num-1)) == 0;
     }
 
     public static void main(String[] args) {
@@ -32,18 +32,21 @@ public class Example3 {
         System.out.println(isOdd(4));
         System.out.println(powerOf2(3));
         System.out.println(powerOf2(4));
-        // 测试移位运算符
+        System.out.println("======测试移位运算符");
         int number = 10;
-        //原始数二进制。输出一个整数的二进制数
-        System.out.println(Integer.toBinaryString(number));
+        // 原始数二进制。输出一个整数的二进制数
+        System.out.println(number + " 的二进制数: " + Integer.toBinaryString(number));
+        System.out.println("======左移");
         number = number << 1;
-        //左移一位。<<:左移运算符，num << 1,相当于num乘以2
+        // 左移一位。<<:左移运算符，num << 1,相当于num乘以2
         System.out.println(number);
         System.out.println(Integer.toBinaryString(number));
+        System.out.println("======右移");
         number = number >> 1;
-        //右移一位。>>:右移运算符，num >> 1,相当于num除以2
+        // 右移一位。>>:右移运算符，num >> 1,相当于num除以2
         System.out.println(number);
         System.out.println(Integer.toBinaryString(number));
+        System.out.println("===左移是给右边补0，右移是给右边减0");
     }
 
 }

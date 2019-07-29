@@ -6,18 +6,18 @@ package interview.loop;
 public class BinarySearch {
 
     /**
-     * Searches element k in a sorted array.
-     * @param arr a sorted array
-     * @param k the element to search
-     * @return index in arr where k is -1 if not found.
+     * 有序数组里查找元素k
+     * @param arr 有序数组
+     * @param k 要查找的元素
+     * @return 元素k的索引，如果没找到返回-1
      * 参数用int[]，而不用List<Interger>，因为数组可以随机访问，list底层是链表，要到中间还是要从头遍历，这样二分查找没有意义
      */
     public int binarySearch(int[] arr, int k){
         int a = 0;
-        int b = arr.length; // arr.length和arr.length如何选择？两种都可以
+        int b = arr.length; // arr.length和arr.length - 1如何选择？两种都可以
         /*
          * 如果选择arr.length，要始终保证k所在区间在a...b-1中
-         * 如果选择arr.length，要始终保证k所在区间在a...b中
+         * 如果选择arr.length - 1，要始终保证k所在区间在a...b中
          * java类库中的就是arr.length - 1
          * 这里使用arr.length
          */

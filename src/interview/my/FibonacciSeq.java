@@ -23,7 +23,9 @@ public class FibonacciSeq {
     }
 
     private static void printFib1_1(int num) {
-        for(int i = 1; i <= num; i ++) System.out.print(getFib1(i) + "\t");
+        for(int i = 1; i <= num; i ++) {
+            System.out.print(getFib1(i) + "\t");
+        }
     }
 
     private static void printFib2(int num) {
@@ -43,7 +45,9 @@ public class FibonacciSeq {
     }
 
     private static void printFib3(int num) {
-        for(int i = 1; i <= num; i ++) System.out.print(getFib1(i) + "\t");
+        for(int i = 1; i <= num; i ++) {
+            System.out.print(getFib1(i) + "\t");
+        }
     }
 
     /**

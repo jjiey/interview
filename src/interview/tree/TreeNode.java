@@ -4,7 +4,8 @@ public class TreeNode {
     private final char value;
     private TreeNode left;
     private TreeNode right;
-    private TreeNode parent; // 记录父节点，可以用来寻找中序遍历的下一个节点
+    // 记录父节点，可以用来寻找中序遍历的下一个节点
+    private TreeNode parent;
 
     public TreeNode(char value) {
         this.value = value;

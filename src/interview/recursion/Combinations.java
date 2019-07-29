@@ -17,12 +17,7 @@ public class Combinations {
      */
     public void combinations(List<Integer> selected, List<Integer> data, int n) {
         if(n == 0){
-            // output all selected elements
-            for (Integer i : selected) {
-                System.out.print(i);
-                System.out.print(" ");
-            }
-            System.out.println();
+            System.out.println(selected.toString());
             return;
         }
 
@@ -30,21 +25,12 @@ public class Combinations {
             return;
         }
 
-        // select element 0
+        // 选择第0个元素
         selected.add(data.get(0));
-        System.out.println("===================+++");
-        selected.forEach(i -> System.out.print(i + " "));
-        System.out.println();
-        combinations(selected, data.subList(1, data.size()), n-1);
+        combinations(selected, data.subList(1, data.size()), n - 1);
 
-        // un-select element 0
+        // 不选择第0个元素
         selected.remove(selected.size() - 1);
-        System.out.println("===================---");
-        selected.forEach(i -> System.out.print(i + " "));
-        System.out.print("   从 ");
-        data.forEach(i -> System.out.print(i + " "));
-        System.out.print("里选 " + n + " 个");
-        System.out.println();
         combinations(selected, data.subList(1, data.size()), n);
     }
 

@@ -3,7 +3,7 @@ package interview.my;
 /**
  * 字符串反转
  */
-public class Example4 {
+public class ReverseString {
 
     /**
      * StringBuilder的reverse方法
