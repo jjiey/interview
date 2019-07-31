@@ -27,9 +27,6 @@ public class LinkedListReverser {
         return newHead;
     }
 
-
-
-
     public static void main(String[] args) {
         LinkedListCreator creator = new LinkedListCreator();
         LinkedListReverser reverser = new LinkedListReverser();

@@ -1,8 +1,6 @@
 package interview.tree;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 遍历树
@@ -122,6 +120,9 @@ public class TreeTraversal {
         traversal.postOrder(sampleTree);
         System.out.println();
         traversal.levelOrder(sampleTree);
+        //
+        System.out.println();
+        traversal.levelOrder2(sampleTree);
         System.out.println();
 
         System.out.println("==========");
@@ -143,6 +144,36 @@ public class TreeTraversal {
         System.out.println(traversal.postOrder("", ""));
         System.out.println(traversal.postOrder("A", "A"));
         System.out.println(traversal.postOrder("AB", "BA"));
+    }
+
+    private List<List<Character>> levelOrder2(TreeNode root) {
+        ArrayList<List<Character>> res = new ArrayList<>();
+        if(root == null)
+            return res;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int levelNum = 1;
+        while(!queue.isEmpty()){
+            int newLevelNum = 0;
+            ArrayList<Character> level = new ArrayList<>();
+            for(int i = 0; i < levelNum; i ++){
+                TreeNode node = queue.remove();
+                level.add(node.getValue());
+
+                if(node.getLeft() != null){
+                    queue.add(node.getLeft());
+                    newLevelNum ++;
+                }
+                if(node.getRight() != null){
+                    queue.add(node.getRight());
+                    newLevelNum ++;
+                }
+            }
+            res.add(level);
+            levelNum = newLevelNum;
+        }
+        System.out.println(res.toString());
+        return res;
     }
 
 }
