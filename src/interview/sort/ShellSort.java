@@ -19,7 +19,7 @@ public class ShellSort {
 		int step = len;
 		while(step >= 1) {
 			step = step / 2;
-			for(int i = step; i < len; i ++) {
+			for(int i = step; i < len; i++) {
 				for(int j = i; j - step >= 0; j -= step) {
 					if(data[j] < data[j - step]) {
 						// swap

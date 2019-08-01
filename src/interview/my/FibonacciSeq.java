@@ -14,7 +14,7 @@ public class FibonacciSeq {
         else if (num >= 3) {
             System.out.print(1 + "\t" + 1 + "\t");
             int a = 1, b = 1, c;
-            for (int i = 3; i <= num; i ++) {
+            for (int i = 3; i <= num; i++) {
                 c = a + b;
                 a = b;
                 b = c;
@@ -24,7 +24,7 @@ public class FibonacciSeq {
     }
 
     private static void printFib1_1(int num) {
-        for(int i = 1; i <= num; i ++) {
+        for(int i = 1; i <= num; i++) {
             System.out.print(getFib1(i) + "\t");
         }
     }
@@ -46,7 +46,7 @@ public class FibonacciSeq {
     }
 
     private static void printFib3(int num) {
-        for(int i = 1; i <= num; i ++) {
+        for(int i = 1; i <= num; i++) {
             System.out.print(getFib1(i) + "\t");
         }
     }
@@ -182,7 +182,7 @@ public class FibonacciSeq {
     }
 
     private static void printFibFast(int num) {
-        for(int i = 1; i <= num; i ++) System.out.print(getFib8(i) + "\t");
+        for(int i = 1; i <= num; i++) System.out.print(getFib8(i) + "\t");
     }
 
     private static void java8lambda(int num) {

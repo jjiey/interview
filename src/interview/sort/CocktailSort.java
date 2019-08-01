@@ -15,7 +15,7 @@ public class CocktailSort {
     private static void cocktailSort(int[] data) {
         int temp;
         // 因为一大轮要进行正反两小轮排序，所以大论数要除以2
-        for (int i = 0; i < data.length / 2; i ++) {
+        for (int i = 0; i < data.length / 2; i++) {
             // 有序标记，每一轮的初始值都是true
             boolean isSorted = true;
             // 奇数轮，从左到右
@@ -67,7 +67,7 @@ public class CocktailSort {
         int oddSortBorder = data.length - 1;
         // 偶数轮无序数组的边界，每次比较只需要比到这里为止，第一次边界为第一个值
         int evenSortBorder = 0;
-        for (int i = 0; i < data.length / 2; i ++) {
+        for (int i = 0; i < data.length / 2; i++) {
             // 有序标记，每一轮的初始值都是true
             boolean isSorted = true;
             // 奇数轮，从左到右

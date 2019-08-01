@@ -71,7 +71,7 @@ public class BinarySearchTree {
 	public static void main(String[] args) {
 		int data[] = {0,5,9,1,2,3,10};
 		BinarySearchTree root = new BinarySearchTree(data[0]); // 第一个点作为跟结点
-		for(int i = 1 ; i < data.length ; i ++) {
+		for(int i = 1 ; i < data.length ; i++) {
 			root.insert(root, data[i]);
 		}
 		System.out.println("中序遍历:");

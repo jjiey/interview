@@ -13,7 +13,7 @@ public class LinkedListCreator {
     public Node createLargeLinkedList(int size){
         Node prev = null;
         Node head = null; //head节点
-        for(int i = 1; i <= size; i ++){
+        for(int i = 1; i <= size; i++){
             Node node = new Node(i);
             if(prev != null){
                 prev.setNext(node);

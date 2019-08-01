@@ -181,7 +181,7 @@ public class QuickSort {
 		int pivot = data[left];
 		// 代表小于基准元素pivot的区域边界
 		int mark = left;
-		for (int i = left + 1; i <= right; i ++) {
+		for (int i = left + 1; i <= right; i++) {
 			if (data[i] < pivot) {
 				mark ++;
 				// swap data[mark] and data[i]

@@ -23,7 +23,7 @@ public class Solution20 {
             put('}', '{');
         }};
         Set<Character> parenMapKeys = parenMap.keySet();
-        for(int i = 0 ; i < s.length() ; i ++){
+        for(int i = 0 ; i < s.length() ; i++){
             char c = s.charAt(i);
             // 说明是左半部分直接入栈, 否则进行判断
             if (!parenMapKeys.contains(c)) {

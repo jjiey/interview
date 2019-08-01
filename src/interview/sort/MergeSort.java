@@ -68,7 +68,7 @@ public class MergeSort {
 			temp[loc ++] = data[point2 ++];
 		}
 		/* 复制回原来的数组 */
-		for(int i = left; i <= right; i ++) {
+		for(int i = left; i <= right; i++) {
 			data[i] = temp[i];
 		}
 	}

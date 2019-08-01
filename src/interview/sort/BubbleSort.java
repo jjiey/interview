@@ -19,7 +19,7 @@ public class BubbleSort {
 	 */
 	private static void bubbleSort(int[] data) {
 		int temp;
-		for (int i = 0; i < data.length - 1; i ++) {
+		for (int i = 0; i < data.length - 1; i++) {
 			for (int j = 0; j < data.length - 1 - i; j ++) {
 				if (data[j] > data[j + 1]) {
 					// swap
@@ -39,7 +39,7 @@ public class BubbleSort {
 	 */
 	private static void bubbleSort1(int[] data) {
 		int temp;
-		for (int i = 0; i < data.length - 1; i ++) {
+		for (int i = 0; i < data.length - 1; i++) {
 			// 有序标记，每一轮的初始值都是true
 			boolean isSorted = true;
 			for (int j = 0; j < data.length - 1 - i; j ++) {
@@ -70,7 +70,7 @@ public class BubbleSort {
 		int lastChangeIndex = 0;
 		// 无序数组的边界，每次比较只需要比到这里为止，第一次边界为最后一个值
 		int sortBorder = data.length - 1;
-		for (int i = 0; i < data.length - 1; i ++) {
+		for (int i = 0; i < data.length - 1; i++) {
 			// 有序标记，每一轮的初始值都是true
 			boolean isSorted = true;
 			for (int j = 0; j < sortBorder; j ++) {

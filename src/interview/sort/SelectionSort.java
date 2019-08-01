@@ -15,7 +15,7 @@ public class SelectionSort {
 
     private static void selectionSort(int[] data) {
         int len = data.length;
-        for (int i = 0; i < len; i ++) {
+        for (int i = 0; i < len; i++) {
             int minIndex = i; // 记录最小值的下标
             /* 找出最小值的下标 */
             for (int j = i + 1; j < len; j ++) {

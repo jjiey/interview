@@ -156,7 +156,7 @@ public class TreeTraversal {
         while(!queue.isEmpty()){
             int newLevelNum = 0;
             ArrayList<Character> level = new ArrayList<>();
-            for(int i = 0; i < levelNum; i ++){
+            for(int i = 0; i < levelNum; i++){
                 TreeNode node = queue.remove();
                 level.add(node.getValue());
 
