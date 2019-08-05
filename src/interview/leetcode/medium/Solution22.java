@@ -29,6 +29,7 @@ public class Solution22 {
      * @param left 可用的左括号数
      * @param right 可用的右括号数
      * 先拼接左括号, 再拼接右括号
+     * 其他思路: 一共n * 2个字符, 每个字符都可以是左括号或者右括号, 列出所有组合, 去掉不合法的
      */
     private void generate(List<String> res, String s, int left, int right) {
         // 当左右括号都用完, 一次s拼接完成, 加入res

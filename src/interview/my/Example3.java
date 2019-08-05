@@ -21,7 +21,7 @@ public class Example3 {
      */
     public static boolean powerOf2(int num) {
         // 2的n次方变成二进制后首位为1，其余位都为0
-        return (num & (num-1)) == 0;
+        return num > 0 && (num & (num - 1)) == 0;
     }
 
     public static void main(String[] args) {

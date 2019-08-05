@@ -8,38 +8,6 @@ import java.util.*;
 public class TreeTraversal {
 
     /**
-     * 前序遍历：根左右
-     * @param root
-     */
-    public void preOrder(TreeNode root){
-        if(root == null){
-            return;
-        }
-        System.out.print(root.getValue());
-        preOrder(root.getLeft());
-        preOrder(root.getRight());
-    }
-
-    /**
-     * 前序遍历非递归实现
-     * @param root
-     */
-    public void preOrderNR(TreeNode root){
-        if(root == null)
-            return;
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        while(!stack.isEmpty()){
-            TreeNode cur = stack.pop();
-            System.out.print(cur.getValue());
-            if(cur.getRight() != null)
-                stack.push(cur.getRight());
-            if(cur.getLeft() != null)
-                stack.push(cur.getLeft());
-        }
-    }
-
-    /**
      * 层序遍历（广度优先遍历）
      * 和非递归前序遍历逻辑一致，只是使用的数据结构不一致
      * @param root
@@ -60,6 +28,38 @@ public class TreeTraversal {
     }
 
     /**
+     * 前序遍历：根左右
+     * @param root
+     */
+    public void preOrder(TreeNode root){
+        if(root == null){
+            return;
+        }
+        System.out.print(root.getValue());
+        preOrder(root.getLeft());
+        preOrder(root.getRight());
+    }
+
+    /**
+     * 前序遍历非递归实现
+     * @param root
+     */
+    public void preOrderNR(TreeNode root){
+        if (root == null)
+            return;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            System.out.print(cur.getValue());
+            if(cur.getRight() != null)
+                stack.push(cur.getRight());
+            if(cur.getLeft() != null)
+                stack.push(cur.getLeft());
+        }
+    }
+
+    /**
      * 中序遍历：左根右
      * @param root
      */
@@ -73,6 +73,26 @@ public class TreeTraversal {
     }
 
     /**
+     * 中序遍历非递归实现
+     * @param root
+     */
+    public void inOrderNR(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        // 防止改变原root
+        TreeNode curr = root;
+        while(curr != null || !stack.isEmpty()){
+            // 左孩子都加进去
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.getLeft();
+            }
+            curr = stack.pop();
+            System.out.print(curr.getValue());
+            curr = curr.getRight();
+        }
+    }
+
+    /**
      * 后序遍历：左右根
      * @param root
      */
@@ -83,6 +103,31 @@ public class TreeTraversal {
         postOrder(root.getLeft());
         postOrder(root.getRight());
         System.out.print(root.getValue());
+    }
+
+    /**
+     * 后序遍历非递归实现
+     * @param root
+     */
+    public void postOrderNR(TreeNode root){
+        if (root == null) {
+            return;
+        }
+        // 双向链表
+        LinkedList<TreeNode> linkedList = new LinkedList<>();
+        LinkedList<Character> output = new LinkedList<>();
+        linkedList.add(root);
+        while (!linkedList.isEmpty()) {
+            TreeNode node = linkedList.pollLast();
+            output.addFirst(node.getValue());
+            if (node.getLeft() != null) {
+                linkedList.add(node.getLeft());
+            }
+            if (node.getRight() != null) {
+                linkedList.add(node.getRight());
+            }
+        }
+        System.out.print(output);
     }
 
     /**
@@ -117,12 +162,13 @@ public class TreeTraversal {
         System.out.println();
         traversal.inOrder(sampleTree);
         System.out.println();
+        traversal.inOrderNR(sampleTree);
+        System.out.println();
         traversal.postOrder(sampleTree);
         System.out.println();
-        traversal.levelOrder(sampleTree);
-        //
+        traversal.postOrderNR(sampleTree);
         System.out.println();
-        traversal.levelOrder2(sampleTree);
+        traversal.levelOrder(sampleTree);
         System.out.println();
 
         System.out.println("==========");
@@ -144,36 +190,6 @@ public class TreeTraversal {
         System.out.println(traversal.postOrder("", ""));
         System.out.println(traversal.postOrder("A", "A"));
         System.out.println(traversal.postOrder("AB", "BA"));
-    }
-
-    private List<List<Character>> levelOrder2(TreeNode root) {
-        ArrayList<List<Character>> res = new ArrayList<>();
-        if(root == null)
-            return res;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        int levelNum = 1;
-        while(!queue.isEmpty()){
-            int newLevelNum = 0;
-            ArrayList<Character> level = new ArrayList<>();
-            for(int i = 0; i < levelNum; i++){
-                TreeNode node = queue.remove();
-                level.add(node.getValue());
-
-                if(node.getLeft() != null){
-                    queue.add(node.getLeft());
-                    newLevelNum ++;
-                }
-                if(node.getRight() != null){
-                    queue.add(node.getRight());
-                    newLevelNum ++;
-                }
-            }
-            res.add(level);
-            levelNum = newLevelNum;
-        }
-        System.out.println(res.toString());
-        return res;
     }
 
 }

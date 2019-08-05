@@ -1,5 +1,7 @@
 package interview.leetcode.medium;
 
+import interview.leetcode.common.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -74,15 +76,6 @@ public class Solution102 {
         res.get(level).add(node.val);
         _dfs(res, node.left, level + 1);
         _dfs(res, node.right, level + 1);
-    }
-
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) {
-            val = x;
-        }
     }
 
 }

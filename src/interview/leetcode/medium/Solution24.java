@@ -1,5 +1,7 @@
 package interview.leetcode.medium;
 
+import interview.leetcode.common.ListNode;
+
 /**
  * Swap Nodes in Pairs
  * 两两交换链表中的节点
@@ -9,7 +11,7 @@ public class Solution24 {
 
     public static void main(String[] args) {
         Solution24 lc = new Solution24();
-        ListNode head = lc.createListNode(lc);
+        ListNode head = lc.createListNode();
         ListNode res = lc.swapPairs(head);
         lc.printListNode(res);
     }
@@ -36,19 +38,11 @@ public class Solution24 {
         return res.next;
     }
 
-    class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
-    private ListNode createListNode(Solution24 lc) {
-        ListNode one = lc.new ListNode(1);
-        ListNode two = lc.new ListNode(2);
-        ListNode three = lc.new ListNode(3);
-        ListNode four = lc.new ListNode(4);
+    private ListNode createListNode() {
+        ListNode one = new ListNode(1);
+        ListNode two = new ListNode(2);
+        ListNode three = new ListNode(3);
+        ListNode four = new ListNode(4);
         one.next = two;
         two.next = three;
         three.next = four;

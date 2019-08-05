@@ -1,5 +1,7 @@
 package interview.leetcode.easy;
 
+import interview.leetcode.common.TreeNode;
+
 /**
  * Lowest Common Ancestor of a Binary Search Tree
  * 二叉搜索树的最近公共祖先
@@ -23,15 +25,6 @@ public class Solution235 {
             }
         }
         return null;
-    }
-
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) {
-            val = x;
-        }
     }
 
 }

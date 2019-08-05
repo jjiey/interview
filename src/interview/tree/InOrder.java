@@ -15,7 +15,7 @@ public class InOrder {
             return null;
         }
 
-        if(node.getRight() != null) { // 如果右子树不为null
+        if (node.getRight() != null) { // 如果右子树不为null
             // 返回右子树的第一个结点
             return first(node.getRight());
         } else {  // 如果右子树为null，往上走
@@ -38,7 +38,7 @@ public class InOrder {
         }
 
         TreeNode curNode = node;
-        while(curNode.getLeft() != null) {
+        while (curNode.getLeft() != null) {
             curNode = curNode.getLeft();
         }
         return curNode;
@@ -49,7 +49,7 @@ public class InOrder {
      * @param root
      */
     public void inOrderNR(TreeNode root) {
-        for(TreeNode node = first(root); node != null; node = next(node)) {
+        for (TreeNode node = first(root); node != null; node = next(node)) {
             System.out.print(node.getValue());
         }
         System.out.println();

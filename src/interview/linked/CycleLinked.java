@@ -2,37 +2,7 @@ package interview.linked;
 
 import interview.common.Node;
 
-/**
- * 判断单链表是否有环
- * 时间复杂度O(N)
- * 没有使用任何额外存储空间，空间复杂度是O(1)
- */
 public class CycleLinked {
-
-    /**
-     * isCycle
-     * @param head 链表头节点
-     * @return 是否有环
-     * 思路：快慢指针
-     * 其它思路：
-     *     1.每遍历一个节点，就从头开始遍历一遍比较值
-     *     2.每遍历一个节点，和HashSet中的值比较，如果值存在，有环，否则存入HashSet，继续遍历
-     */
-    private static boolean isCycle(Node head) {
-        Node slow = head;
-        Node fast = head;
-        while (fast != null && fast.getNext() != null) {
-            fast = fast.getNext();
-            if (fast.getNext() != null) {
-                slow = slow.getNext();
-                fast = fast.getNext();
-                if (slow.getValue() == fast.getValue()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     /**
      * 求环长
@@ -68,50 +38,6 @@ public class CycleLinked {
         return 0;
     }
 
-    /**
-     * 求入环点
-     * @param head 链表头节点
-     * @return 入环点
-     * 思路：
-     *     假设链表头节点到入环点距离为D，入环点到两个指针首次相遇点距离为s1，两个指针首次相遇点回到入环点距离为s2
-     *     当两个指针首次相遇时：
-     *         slow指针走的距离 = D + s1
-     *         fast指针走的距离 = D + s1 + s2 + s1 = D + 2s1 + s2
-     *         而fast指针走的距离还 = 2 * (slow指针走的距离) = 2 * (D + s1)
-     *         由D + 2s1 + s2 = 2 * (D + s1)得D = s2，即链表头节点到入环点距离等于两个指针首次相遇点回到入环点距离
-     *     把其中一个指针放回到头节点，另一个指针在首次相遇点，两个指针每次走一步，相遇点即为入环点
-     */
-    private static Node getCyclePoint(Node head) {
-        Node slow = head;
-        Node fast = head;
-        boolean isLoop = false;
-        while (fast != null && fast.getNext() != null) {
-            fast = fast.getNext();
-            if (fast.getNext() != null){
-                slow = slow.getNext();
-                fast = fast.getNext();
-                if (slow.getValue() == fast.getValue()) {
-                    isLoop = true;
-                    break;
-                }
-            }
-        }
-        // 如果有环
-        if(isLoop){
-            // slow指针回到头节点
-            slow = head;
-            while (true) {
-                // 两指针相遇的点即是入环点
-                if(slow.getValue() == fast.getValue()){
-                    return slow;
-                }
-                slow = slow.getNext();
-                fast = fast.getNext();
-            }
-        }
-        return null;
-    }
-
     public static void main(String[] args) {
         Node node1 = new Node(5);
         Node node2 = new Node(3);
@@ -123,9 +49,7 @@ public class CycleLinked {
         node3.setNext(node4);
         node4.setNext(node5);
         node5.setNext(node2);
-        System.out.println(isCycle(node1));
         System.out.println(getLenCycle(node1));
-        System.out.println(getCyclePoint(node1) != null ? getCyclePoint(node1).getValue() : null);
     }
 
 }

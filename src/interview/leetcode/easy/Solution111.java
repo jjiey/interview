@@ -1,5 +1,7 @@
 package interview.leetcode.easy;
 
+import interview.leetcode.common.TreeNode;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -74,15 +76,6 @@ public class Solution111 {
             }
         }
         return minDepth;
-    }
-
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) {
-            val = x;
-        }
     }
 
 }

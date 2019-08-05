@@ -1,5 +1,7 @@
 package interview.leetcode.medium;
 
+import interview.leetcode.common.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +15,11 @@ public class Solution98 {
 
     public static void main(String[] args) {
         Solution98 lc = new Solution98();
-        TreeNode five = lc.new TreeNode(5);
-        TreeNode one = lc.new TreeNode(1);
-        TreeNode four = lc.new TreeNode(4);
-        TreeNode three = lc.new TreeNode(3);
-        TreeNode six = lc.new TreeNode(6);
+        TreeNode five = new TreeNode(5);
+        TreeNode one = new TreeNode(1);
+        TreeNode four = new TreeNode(4);
+        TreeNode three = new TreeNode(3);
+        TreeNode six = new TreeNode(6);
         five.left = one;
         five.right = four;
         four.left = three;
@@ -75,15 +77,6 @@ public class Solution98 {
         }
         // 左子树 && 右子树
         return isValid(root.left, min, root.val) && isValid(root.right, root.val, max);
-    }
-
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) {
-            val = x;
-        }
     }
 
 }

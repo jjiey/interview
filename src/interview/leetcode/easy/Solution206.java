@@ -1,5 +1,7 @@
 package interview.leetcode.easy;
 
+import interview.leetcode.common.ListNode;
+
 /**
  * Reverse Linked List
  * 反转链表
@@ -8,7 +10,7 @@ public class Solution206 {
 
     public static void main(String[] args) {
         Solution206 lc = new Solution206();
-        ListNode head = lc.createListNode(lc);
+        ListNode head = lc.createListNode();
 //        ListNode res = lc.reverseListRecursion(head);
         ListNode res = lc.reverseListNoRecursion(head);
         lc.printListNode(res);
@@ -49,19 +51,11 @@ public class Solution206 {
         return newNode;
     }
 
-    class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
-    private ListNode createListNode(Solution206 lc) {
-        ListNode one = lc.new ListNode(1);
-        ListNode two = lc.new ListNode(2);
-        ListNode three = lc.new ListNode(3);
-        ListNode four = lc.new ListNode(4);
+    private ListNode createListNode() {
+        ListNode one = new ListNode(1);
+        ListNode two = new ListNode(2);
+        ListNode three = new ListNode(3);
+        ListNode four = new ListNode(4);
         one.next = two;
         two.next = three;
         three.next = four;
