@@ -1,16 +1,12 @@
 package interview.leetcode.hard;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * N-Queens
  * N皇后
  * 皇后可以攻击横竖斜区域
- * TODO
  */
 public class Solution51 {
 
@@ -27,11 +23,7 @@ public class Solution51 {
         if (n < 1) {
             return res;
         }
-        Set<Integer> cols = new HashSet<>();
-        Set<Integer> pie = new HashSet<>();
-        Set<Integer> na = new HashSet<>();
-        int row = 0;
-        _dfs(n, res, cols, pie, na, row, new ArrayList<>());
+        _dfs(n, res, new HashSet<>(), new HashSet<>(), new HashSet<>(), 0, new ArrayList<>());
         return res;
     }
 
@@ -54,7 +46,7 @@ public class Solution51 {
         }
         // 遍历列
         for (int j = 0; j < n; j++) {
-            // 会被攻击的区域
+            // 如果在会被攻击的区域, continue
             if (pie.contains(row + j) || na.contains(j - row) || cols.contains(j)) {
                 continue;
             }
@@ -63,7 +55,7 @@ public class Solution51 {
             na.add(j - row);
             cols.add(j);
 
-            String temp = getStr(n,j);
+            String temp = getStr(n, j);
             tempList.add(temp);
 
             _dfs(n, res, cols, pie, na, row + 1, tempList);
@@ -79,11 +71,7 @@ public class Solution51 {
     private String getStr(int n, int j) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            if (i == j) {
-                stringBuilder.append("Q");
-            } else {
-                stringBuilder.append(".");
-            }
+            stringBuilder.append(i == j ? "Q" : ".");
         }
         return stringBuilder.toString();
     }

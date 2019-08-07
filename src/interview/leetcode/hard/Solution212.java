@@ -13,10 +13,11 @@ public class Solution212 {
 
     public static void main(String[] args) {
         Solution212 lc = new Solution212();
-//        char[][] board = {{'o','a','a','n'}, {'e','t','a','e'}, {'i','h','k','r'}, {'i','f','l','v'}};
-//        String[] words = new String[]{"oath","pea","eat","rain"};
-        char[][] board = {{'a', 'b'}, {'a','a'}};
-        String[] words = new String[]{"aba","baa","bab","aaab","aaa","aaaa","aaba"};
+        char[][] board = {{'o', 'a', 'a', 'n'},
+                          {'e', 't', 'a', 'e'},
+                          {'i', 'h', 'k', 'r'},
+                          {'i', 'f', 'l', 'v'}};
+        String[] words = new String[]{"oath", "pea", "eat", "rain"};
         List<String> res = lc.findWords(board, words);
         System.out.println(res.toString());
     }
@@ -29,7 +30,10 @@ public class Solution212 {
      * x,y-1  x,y    x,y+1
      *        x+1,y
      */
-    private int[][] direction = {{-1, 0},{0, 1},{1, 0},{0, -1}};
+    private int[][] direction = {{-1, 0},
+                                 {0, 1},
+                                 {1, 0},
+                                 {0, -1}};
     // board上有多少行
     private int rows;
     // board上有多少列
@@ -80,18 +84,20 @@ public class Solution212 {
         visited[startX][startY] = false;
     }
 
+    /**
+     * 判断(x, y)坐标是否在board内
+     */
     private boolean inArea(int x, int y) {
         return x >= 0 && x < rows && y >= 0 && y < cols;
     }
 
-    /* Trie */
-
+    /* Solution208 - Trie */
     class Trie {
 
         class TrieNode {
             public char val;
             // 标识一个单词的结束
-            public boolean isWord;
+            public boolean isWord = false;
             // 该字符的所有子节点
             public TrieNode[] children = new TrieNode[26];
 
@@ -99,8 +105,8 @@ public class Solution212 {
                 this.val = ' ';
             }
             public TrieNode(char c) {
-                TrieNode node = new TrieNode();
-                node.val = c;
+                this();
+                this.val = c;
             }
         }
 

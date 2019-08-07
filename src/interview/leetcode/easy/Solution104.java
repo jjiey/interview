@@ -8,6 +8,7 @@ import java.util.Queue;
 /**
  * Maximum Depth of Binary Tree
  * 二叉树的最大深度
+ * 输入是层序遍历结果
  */
 public class Solution104 {
 
@@ -24,6 +25,7 @@ public class Solution104 {
 
     /**
      * BFS
+     * 层序遍历层数即为二叉树的最大深度
      */
     private int maxDepth2 (TreeNode root) {
         if(root == null) {

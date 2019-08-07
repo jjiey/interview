@@ -25,7 +25,7 @@ public class Solution22 {
     /**
      * 括号生成
      * @param res result
-     * @param s 拼接结果
+     * @param s 一次的拼接结果
      * @param left 可用的左括号数
      * @param right 可用的右括号数
      * 先拼接左括号, 再拼接右括号
@@ -37,6 +37,7 @@ public class Solution22 {
             res.add(s);
             return;
         }
+        // 当可用的左括号还有, 就先使用左括号
         if (left > 0) {
             generate(res, s + "(", left - 1, right);
         }

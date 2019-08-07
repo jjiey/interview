@@ -58,6 +58,7 @@ public class Solution98 {
 
     /**
      * 递归
+     * 直到所有节点都满足: 右子树最小值 > 根节点, 左子树最大值 < 根节点
      */
     private boolean isValidBST2(TreeNode root) {
         return isValid(root, null, null);

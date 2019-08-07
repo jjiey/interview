@@ -12,21 +12,18 @@ import java.util.Arrays;
 public class LinkedListDeletor {
 
     public Node deleteIfEquals(Node head, int value) {
-        //注意这里是while，连续处理头节点
+        // 注意这里是while, 连续处理头节点
         while (head != null && head.getValue() == value) {
             head = head.getNext();
         }
-
-        if(head == null) {
-            return null;
+        if (head == null) {
+            return head;
         }
-
         Node prev = head;
-        // Loop invariant: list nodes from head up to prevhas been
-        // processed. (Nodes with values equal to value are deleted.)
+        // Loop invariant: list nodes from head up to prev has been processed. (Nodes with values equal to value are deleted.)
         while (prev.getNext() != null) {
             if (prev.getNext().getValue() == value) {
-                // delete it
+                // 删除
                 prev.setNext(prev.getNext().getNext());
             } else {
                 prev = prev.getNext();

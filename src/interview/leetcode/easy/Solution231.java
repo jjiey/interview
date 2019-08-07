@@ -10,7 +10,7 @@ public class Solution231 {
     public static void main(String[] args) {
         Solution231 lc = new Solution231();
         int n = 536870912;
-        boolean res = lc.isPowerOfTwo2(n);
+        boolean res = lc.isPowerOfTwo3(n);
         System.out.println(res);
     }
 
@@ -23,9 +23,23 @@ public class Solution231 {
     }
 
     /**
-     * 内置库函数log2, 然后判断是否是整数 TODO 越写越恶心,不太靠谱吧,下边这个不对
+     * 暴力
      */
     private boolean isPowerOfTwo2(int n) {
+        int temp = 1;
+        while (temp < n) {
+            if (temp == n) {
+                return true;
+            }
+            temp = temp << 1;
+        }
+        return false;
+    }
+
+    /**
+     * 内置库函数log2, 然后判断是否是整数 TODO 越写越恶心,不太靠谱吧,下边这个不对
+     */
+    private boolean isPowerOfTwo3(int n) {
         String str = new Double(Math.log(n) / Math.log(2)).toString();
         str = str.substring(str.indexOf(".") + 1);
         for (int i = 0; i < str.length(); i++) {

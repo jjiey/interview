@@ -17,6 +17,7 @@ public class Solution20 {
 
     private boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
+        // 技术处理: K - 右部分 V - 左部分
         Map<Character, Character> parenMap = new HashMap<Character, Character>() {{
             put(')', '(');
             put(']', '[');

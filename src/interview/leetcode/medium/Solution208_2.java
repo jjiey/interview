@@ -25,11 +25,10 @@ public class Solution208_2 {
             // 标识一个单词的结束
             public boolean isWord;
             // 该字符的所有子节点
-            public TreeMap<Character, Node> children;
+            public TreeMap<Character, Node> children = new TreeMap<>();
 
             public Node(boolean isWord) {
                 this.isWord = isWord;
-                children = new TreeMap<>();
             }
 
             public Node() {

@@ -2,6 +2,9 @@ package interview.leetcode.easy;
 
 import interview.leetcode.common.ListNode;
 
+import static interview.leetcode.common.ListNodeUtil.createListNode;
+import static interview.leetcode.common.ListNodeUtil.printListNode;
+
 /**
  * Reverse Linked List
  * 反转链表
@@ -10,10 +13,10 @@ public class Solution206 {
 
     public static void main(String[] args) {
         Solution206 lc = new Solution206();
-        ListNode head = lc.createListNode();
+        ListNode head = createListNode(new int[]{1, 2, 3, 4});
 //        ListNode res = lc.reverseListRecursion(head);
         ListNode res = lc.reverseListNoRecursion(head);
-        lc.printListNode(res);
+        printListNode(res);
     }
 
     /**
@@ -36,37 +39,22 @@ public class Solution206 {
     /**
      * 思路: 非递归, 循环, 三个指针
      *     原链表: 1 -> 2 -> 3 -> 4
-     *     important: newNode是反转后被指向的节点, newNode和curHead同时往前走直到curHead为null
      */
-    private ListNode reverseListNoRecursion(ListNode head){
+    private ListNode reverseListNoRecursion(ListNode head) {
+        // 反转后的前驱结点
         ListNode newNode = null;
         ListNode curHead = head;
         while (curHead != null) {
+            // 先记录一下原curHead.next
             ListNode next = curHead.next;
-            // important
+            // curHead的next指到它的前驱结点
             curHead.next = newNode;
+            // newNode往前走一步
             newNode = curHead;
+            // curHead往前走一步
             curHead = next;
         }
         return newNode;
-    }
-
-    private ListNode createListNode() {
-        ListNode one = new ListNode(1);
-        ListNode two = new ListNode(2);
-        ListNode three = new ListNode(3);
-        ListNode four = new ListNode(4);
-        one.next = two;
-        two.next = three;
-        three.next = four;
-        return one;
-    }
-
-    private void printListNode(ListNode head) {
-        while (head != null) {
-            System.out.print(head.val);
-            head = head.next;
-        }
     }
 
 }

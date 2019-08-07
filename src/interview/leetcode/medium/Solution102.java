@@ -16,9 +16,7 @@ public class Solution102 {
     public static void main(String[] args) {
         Solution102 lc = new Solution102();
 //        List<List<Integer>> res = lc.levelOrder();
-//        for (List<Integer> re : res) {
-//            System.out.println(re.toString());
-//        }
+//        System.out.println(res.toString());
     }
 
     /**
@@ -27,7 +25,7 @@ public class Solution102 {
      */
     private List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        if(root == null) {
+        if (root == null) {
             return res;
         }
         Queue<TreeNode> q = new LinkedList<>();
@@ -54,11 +52,11 @@ public class Solution102 {
 
     /**
      * DFS深度优先搜索
-     * 每一次遍历种, 每层遍历了几个元素就先放进去, 一直到遍历完
+     * 每一次遍历中, 每层遍历了几个元素就先放进去, 一直到遍历完
      */
     private List<List<Integer>> levelOrder2(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        if(root == null) {
+        if (root == null) {
             return res;
         }
         _dfs(res, root, 0);

@@ -22,7 +22,7 @@ public class Solution208_1 {
         class TrieNode {
             public char val;
             // 标识一个单词的结束
-            public boolean isWord;
+            public boolean isWord = false;
             // 该字符的所有子节点
             public TrieNode[] children = new TrieNode[26];
 
@@ -30,8 +30,8 @@ public class Solution208_1 {
                 this.val = ' ';
             }
             public TrieNode(char c) {
-                TrieNode node = new TrieNode();
-                node.val = c;
+                this();
+                this.val = c;
             }
         }
 

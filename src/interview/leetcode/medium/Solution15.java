@@ -66,7 +66,7 @@ public class Solution15 {
      */
     private List<List<Integer>> threeSum2(int[] nums) {
         List<List<Integer>> res = new ArrayList();
-        if(nums == null || nums.length < 3){
+        if (nums == null || nums.length < 3) {
             return res;
         }
         // 先对数组进行排序, 为了方便的过滤掉重复元素
@@ -74,7 +74,7 @@ public class Solution15 {
         Map<Integer,Integer> targetMap = new HashMap<>();
         for(int i = 0; i < nums.length - 1; i++){
             // 过滤掉重复元素
-            if(i > 0 && nums[i] == nums[i-1]) {
+            if (i > 0 && nums[i] == nums[i-1]) {
                 continue;
             }
             targetMap.clear();

@@ -49,6 +49,7 @@ public class Solution111 {
 
     /**
      * BFS
+     * 第一个叶子节点的层数即为二叉树的最小深度
      */
     private int minDepth2(TreeNode root) {
         if(root == null) {

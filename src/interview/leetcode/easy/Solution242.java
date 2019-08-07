@@ -38,6 +38,7 @@ public class Solution242 {
 
     /**
      * HashMap
+     * K - 字符 V - 字符个数
      */
     private boolean isAnagram2(String s, String t) {
         if (s.length() != t.length()) {
@@ -77,10 +78,11 @@ public class Solution242 {
         char c2[] = t.toCharArray();
         int[] dic1 = new int[26];
         int[] dic2 = new int[26];
-        Integer aASC = Integer.valueOf('a');
+        // 这样写不用进行不必要的拆箱
+        Integer aASC = (int) 'a';
         for (int i = 0; i < s.length(); i++) {
-            dic1[Integer.valueOf(c1[i]) - aASC] += 1;
-            dic2[Integer.valueOf(c2[i]) - aASC] += 1;
+            dic1[(int) c1[i] - aASC] += 1;
+            dic2[(int) c2[i] - aASC] += 1;
         }
         return Arrays.equals(dic1, dic2);
     }

@@ -7,7 +7,9 @@ package interview.leetcode.medium;
 public class Solution79 {
 
     public static void main(String[] args) {
-        char[][] board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
+        char[][] board = {{'A', 'B', 'C', 'E'},
+                          {'S', 'F', 'C', 'S'},
+                          {'A', 'D', 'E', 'E'}};
         String words[] = {"ABCCED", "SEE", "ABCB"};
         Solution79 lc = new Solution79();
         for (String word : words) {
@@ -22,7 +24,10 @@ public class Solution79 {
      * x,y-1  x,y    x,y+1
      *        x+1,y
      */
-    private int[][] direction = {{-1, 0},{0, 1},{1, 0},{0, -1}};
+    private int[][] direction = {{-1, 0},
+                                 {0, 1},
+                                 {1, 0},
+                                 {0, -1}};
     // board上有多少行
     private int rows;
     // board上有多少列
@@ -68,6 +73,9 @@ public class Solution79 {
         return false;
     }
 
+    /**
+     * 判断(x, y)坐标是否在board内
+     */
     private boolean inArea(int x, int y) {
         return x >= 0 && x < rows && y >= 0 && y < cols;
     }

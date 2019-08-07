@@ -13,13 +13,6 @@ public class Solution225 {
     public static void main(String[] args) {
         Solution225 lc = new Solution225();
         MyStack obj = lc.new MyStack();
-//        obj.push(1);
-//        int param_2 = obj.pop();
-//        System.out.println(param_2);
-//        int param_3 = obj.top();
-//        System.out.println(param_3);
-//        boolean param_4 = obj.empty();
-//        System.out.println(param_4);
         obj.push(1);
         obj.push(2);
         int param_3 = obj.top();
@@ -51,13 +44,17 @@ public class Solution225 {
             if (empty()) {
                 return -1;
             }
-            if(input.size() == 1) {
+            // 如果input里只有一个元素, 直接出
+            if (input.size() == 1) {
                 return input.poll();
             } else {
+                // 如果input里有多个元素, 把前input.size() - 1个元素倒腾到output里
                 while (input.size() != 1) {
                     output.offer(input.poll());
                 }
+                // 从input里取出元素
                 int temp = input.poll();
+                // 再从output里倒腾回去到input
                 while (!output.isEmpty()) {
                     input.offer(output.poll());
                 }
@@ -70,14 +67,19 @@ public class Solution225 {
             if (empty()) {
                 return -1;
             }
-            if(input.size() == 1) {
+            // 如果input里只有一个元素, 直接出
+            if (input.size() == 1) {
                 return input.peek();
             } else {
+                // 如果input里有多个元素, 把前input.size() - 1个元素倒腾到output里
                 while (input.size() != 1) {
                     output.offer(input.poll());
                 }
+                // 从input里取出元素
                 int temp = input.poll();
+                // 再把刚才取出的元素放进output里
                 output.offer(temp);
+                // 再从output里倒腾回去到input
                 while (!output.isEmpty()) {
                     input.offer(output.poll());
                 }
