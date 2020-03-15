@@ -24,7 +24,7 @@ public class Solution142 {
      *         fast指针走的距离 = D + s1 + s2 + s1 = D + 2s1 + s2
      *         而fast指针走的距离还 = 2 * (slow指针走的距离) = 2 * (D + s1)
      *         由D + 2s1 + s2 = 2 * (D + s1)得D = s2，即链表头节点到入环点距离等于两个指针首次相遇点回到入环点距离
-     *     把其中一个指针放回到头节点，另一个指针在首次相遇点，两个指针每次走一步，相遇点即为入环点
+     *     把其中随便一个指针放回到头节点，另一个指针在首次相遇点，两个指针每次走一步，相遇点即为入环点
      */
     private ListNode detectCycle(ListNode head) {
         ListNode slow = head;

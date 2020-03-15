@@ -24,9 +24,11 @@ public class Solution111 {
         if (root == null) {
             return 0;
         }
+        // 如果该节点只有右子树
         if (root.left == null) {
             return 1 + minDepth(root.right);
         }
+        // 如果该节点只有左子树
         if (root.right == null) {
             return 1 + minDepth(root.left);
         }

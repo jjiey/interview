@@ -8,9 +8,16 @@ public class TreeCreator {
     /**
      * 人肉构造二叉树
      * @return
+     *          A
+     *       /   \
+     *     B      C
+     *   / \       \
+     * D    E       F
+     *    /
+     *  G
      */
     public TreeNode createSampleTree() {
-        TreeNode root=new TreeNode('A');
+        TreeNode root = new TreeNode('A');
         root.setLeft(new TreeNode('B'));
         root.getLeft().setLeft(new TreeNode('D'));
         root.getLeft().setRight(new TreeNode('E'));

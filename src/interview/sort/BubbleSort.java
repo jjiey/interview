@@ -20,7 +20,7 @@ public class BubbleSort {
 	private static void bubbleSort(int[] data) {
 		int temp;
 		for (int i = 0; i < data.length - 1; i++) {
-			for (int j = 0; j < data.length - 1 - i; j ++) {
+			for (int j = 0; j < data.length - 1 - i; j++) {
 				if (data[j] > data[j + 1]) {
 					// swap
 					temp = data[j];
@@ -42,7 +42,7 @@ public class BubbleSort {
 		for (int i = 0; i < data.length - 1; i++) {
 			// 有序标记，每一轮的初始值都是true
 			boolean isSorted = true;
-			for (int j = 0; j < data.length - 1 - i; j ++) {
+			for (int j = 0; j < data.length - 1 - i; j++) {
 				if (data[j] > data[j + 1]) {
 					// swap
 					temp = data[j];
@@ -73,7 +73,7 @@ public class BubbleSort {
 		for (int i = 0; i < data.length - 1; i++) {
 			// 有序标记，每一轮的初始值都是true
 			boolean isSorted = true;
-			for (int j = 0; j < sortBorder; j ++) {
+			for (int j = 0; j < sortBorder; j++) {
 				if (data[j] > data[j + 1]) {
 					// swap
 					temp = data[j];

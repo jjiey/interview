@@ -35,9 +35,9 @@ public class Solution104 {
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         while (!q.isEmpty()) {
-            // 当前层的总长度
-            int levelSize = q.size();
             maxDepth ++;
+            // 当前层的总节点数
+            int levelSize = q.size();
             for (int i = 0; i < levelSize; i++) {
                 TreeNode currNode = q.poll();
                 if (currNode.left != null) {

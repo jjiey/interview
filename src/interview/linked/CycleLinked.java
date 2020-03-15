@@ -2,6 +2,11 @@ package interview.linked;
 
 import interview.common.Node;
 
+/**
+ * 环形链表求环长
+ * 判断链表是否有环，见 Solution141
+ * 求入环点，见 Solution142
+ */
 public class CycleLinked {
 
     /**
@@ -9,8 +14,8 @@ public class CycleLinked {
      * @param head 链表头节点
      * @return 环长
      * 思路：
-     *     当两个指针首次相遇后，让两个指针在相遇点继续循环前进，统计前进次数，当两个指针第二次相遇，前进次数 = 环长
-     *     因为再次相遇时，fast比slow多走一圈，所以环长 = 每一次速度差 * 前进次数 = 1 * 前进次数 = 前进次数
+     *     当两个指针首次相遇后，让两个指针在相遇点继续以原速度前进，此时开始统计前进次数，当两个指针第二次相遇时，此时 前进次数 = 环长
+     *     因为再次相遇时，fast比slow多走一圈，所以环长 = 每一次速度差 * 前进次数 = （2 - 1） * 前进次数 = 前进次数
      */
     private static int getLenCycle(Node head) {
         Node slow = head;

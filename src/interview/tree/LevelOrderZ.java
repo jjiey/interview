@@ -21,7 +21,7 @@ public class LevelOrderZ {
         int depth = 0;
         while (!queue.isEmpty()) {
             depth ++;
-            // 当前层的总长度
+            // 当前层的总节点数
             int levelSize = queue.size();
             // 当前层的结果
             List<Character> currLevel = new ArrayList<>();

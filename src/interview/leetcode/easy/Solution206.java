@@ -41,20 +41,20 @@ public class Solution206 {
      *     原链表: 1 -> 2 -> 3 -> 4
      */
     private ListNode reverseListNoRecursion(ListNode head) {
-        // 反转后的前驱结点
-        ListNode newNode = null;
+        // 反转后的头结点
+        ListNode newHead = null;
         ListNode curHead = head;
         while (curHead != null) {
             // 先记录一下原curHead.next
             ListNode next = curHead.next;
             // curHead的next指到它的前驱结点
-            curHead.next = newNode;
+            curHead.next = newHead;
             // newNode往前走一步
-            newNode = curHead;
+            newHead = curHead;
             // curHead往前走一步
             curHead = next;
         }
-        return newNode;
+        return newHead;
     }
 
 }

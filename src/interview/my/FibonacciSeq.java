@@ -8,10 +8,15 @@ import java.util.stream.Stream;
  */
 public class FibonacciSeq {
 
-    private static void printFib1(int num) {
-        if (num == 1) System.out.print(1 + "\t");
-        else if (num == 2) System.out.print(1 + "\t" + 1 + "\t");
-        else if (num >= 3) {
+    private static void printFibNoRecursive1(int num) {
+        if (num <= 0) {
+            throw new RuntimeException("The input parameter is less than 1");
+        }
+        if (num == 1) {
+            System.out.print(1 + "\t");
+        } else if (num == 2) {
+            System.out.print(1 + "\t" + 1 + "\t");
+        } else if (num >= 3) {
             System.out.print(1 + "\t" + 1 + "\t");
             int a = 1, b = 1, c;
             for (int i = 3; i <= num; i++) {
@@ -23,16 +28,15 @@ public class FibonacciSeq {
         }
     }
 
-    private static void printFib1_1(int num) {
-        for(int i = 1; i <= num; i++) {
-            System.out.print(getFib1(i) + "\t");
+    private static void printFibNoRecursive2(int num) {
+        if (num <= 0) {
+            throw new RuntimeException("The input parameter is less than 1");
         }
-    }
-
-    private static void printFib2(int num) {
-        if (num == 1) System.out.print(1 + "\t");
-        else if (num == 2) System.out.print(1 + "\t" + 1 + "\t");
-        else if (num >= 3) {
+        if (num == 1) {
+            System.out.print(1 + "\t");
+        } else if (num == 2) {
+            System.out.print(1 + "\t" + 1 + "\t");
+        } else if (num >= 3) {
             int[] arr = new int[num];
             arr[0] = 1;
             arr[1] = 1;
@@ -45,9 +49,9 @@ public class FibonacciSeq {
         }
     }
 
-    private static void printFib3(int num) {
+    private static void printFib1(int num) {
         for(int i = 1; i <= num; i++) {
-            System.out.print(getFib1(i) + "\t");
+            System.out.print(getFibRecursive(i) + "\t");
         }
     }
 
@@ -56,10 +60,10 @@ public class FibonacciSeq {
      * @param num
      * @return
      */
-    public static long getFib1(int num) {
+    public static long getFibRecursive(int num) {
         if (num <= 0) throw new RuntimeException("The input parameter is less than 1");
         if(num == 1 || num == 2) return 1;
-        return getFib1(num - 2) + getFib1(num - 1);
+        return getFibRecursive(num - 2) + getFibRecursive(num - 1);
     }
 
     /**
