@@ -11,13 +11,14 @@ public class ThreadPrintString {
 
     private static int maxPrintCount = 100;
 
-    private static final String[] WORD = new String[]{"A", "B", "C"};
+    private static final String[] WORD = new String[]{"A", "B", "C", "D"};
 
     public static void main(String[] args) throws InterruptedException {
-        print(10);
+        print();
     }
 
-    private static void print(int threadCount) throws InterruptedException {
+    private static void print() throws InterruptedException {
+        int threadCount = WORD.length;
         Thread[] threads = new Thread[threadCount];
         final Semaphore[] syncObjects = new Semaphore[threadCount];
         for (int i = 0; i < threadCount; i++) {
@@ -34,8 +35,8 @@ public class ThreadPrintString {
             final Semaphore curSemaphore = syncObjects[i];
             // 线程编号
             final int threadIndex = i;
-            final int wordIndex = i % WORD.length;
-            threads[i] = new Thread(new Thread(() -> {
+            final int wordIndex = i % threadCount;
+            threads[i] = new Thread(() -> {
                 try {
                     while (true) {
                         lastSemaphore.acquire();
@@ -50,7 +51,7 @@ public class ThreadPrintString {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }));
+            });
             threads[i].start();
         }
     }

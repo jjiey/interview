@@ -7,13 +7,14 @@ import static interview.leetcode.common.ListNodeUtil.printListNode;
 
 /**
  * Remove Nth Node From End of List
- * 删除链表的倒数第N个节点
+ * 删除链表的倒数第N个节点，给定的 n 保证是有效的
  */
 public class Solution19 {
 
     public static void main(String[] args) {
         Solution19 lc = new Solution19();
-        ListNode head = createListNode(new int[]{1, 2, 3, 4, 5});
+//        ListNode head = createListNode(new int[]{1, 2, 3, 4, 5});
+        ListNode head = createListNode(new int[]{1});
         int n = 2;
         ListNode res = lc.removeNthFromEnd2(head, n);
         printListNode(res);
@@ -53,7 +54,7 @@ public class Solution19 {
         dummyHead.next = head;
         ListNode first = dummyHead;
         ListNode second = dummyHead;
-        // 中间是相隔n个
+        // first和second中间相隔n个，因为second最后得是删除节点的前一个节点，才能跳过要删除的节点指向要删除节点的下一个节点
         for (int i = 0; i < n + 1; i++) {
             first = first.next;
         }

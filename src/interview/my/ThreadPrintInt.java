@@ -32,7 +32,7 @@ public class ThreadPrintInt {
             final Semaphore curSemaphore = syncObjects[i];
             // 线程编号
             final int threadIndex = i;
-            threads[i] = new Thread(new Thread(() -> {
+            threads[i] = new Thread(() -> {
                 try {
                     while (true) {
                         lastSemaphore.acquire();
@@ -46,7 +46,7 @@ public class ThreadPrintInt {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }));
+            });
             threads[i].start();
         }
     }

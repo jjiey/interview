@@ -23,11 +23,15 @@ public class QuickSortRecursive {
 	 * @param right 结束下标
 	 */
 	private static void quickSortDoubleSideLoop(int[] data, int left, int right) {
+		// 递归结束条件
+		if (left >= right) {
+			return;
+		}
 		// 从左边找的位置
 		int ll = left;
 		// 从右边找的位置
 		int rr = right;
-		// 基准数，取第一个作为基准数
+		// 基准数，每次取第一个作为基准数
 		int pivot = data[left];
 		// 终止条件
 		while (ll != rr) {
@@ -69,6 +73,10 @@ public class QuickSortRecursive {
 	 * @param right 结束下标
 	 */
 	private static void quickSortLeftSideLoop(int[] data, int left, int right) {
+		// 递归结束条件
+		if (left >= right) {
+			return;
+		}
 		// 基准数，取第一个作为基准数
 		int pivot = data[left];
 		// 代表小于基准元素pivot的区域边界
@@ -104,6 +112,10 @@ public class QuickSortRecursive {
 	 * @param right 结束下标
 	 */
 	private static void quickSortRightSideLoop(int[] data, int left, int right) {
+		// 递归结束条件
+		if (left >= right) {
+			return;
+		}
 		// 基准数，取第一个作为基准数
 		int pivot = data[left];
 		// 代表大于基准元素pivot的区域边界

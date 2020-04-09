@@ -38,12 +38,17 @@ public class Solution300 {
         if (nums.length == 0 || nums.length == 1) {
             return nums.length;
         }
+        // 全局结果，记录最长上升子序列的数量
         int res = 1;
+        // 设置每个值的状态初始值为1
         int[] dp = new int[nums.length];
         Arrays.fill(dp, 1);
         for (int i = 1; i < nums.length; i++) {
+            // 遍历i之前的所有值，看能否组成上升子序列
             for (int j = 0; j < i; j++) {
+                // 如果可以组成上升子序列
                 if (nums[j] < nums[i]) {
+                    // 更新i的状态值
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
@@ -54,4 +59,7 @@ public class Solution300 {
 
     // 获取最长上升子序列用O(NlogN)解法结果不一定正确, 比如:[7,8,9,1,2], 且java里没有类似C++里的lower_bound, 该解法只能求出最后的最长上升子序列的值是保证正确的
 
+//    private int lengthOfLIS2(int[] nums) {
+//
+//    }
 }

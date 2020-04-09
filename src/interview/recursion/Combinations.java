@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 列出所有组合
+ * 列出任取其中n个元素的所有组合
  */
 public class Combinations {
 
@@ -13,9 +13,10 @@ public class Combinations {
      * Generates all combinations and output them.
      * selecting n elements from data.
      * @param data
-     * @param n
+     * @param n 从data里选择n个元素
      */
     public void combinations(List<Integer> selected, List<Integer> data, int n) {
+        // n 什么时候 == 0，选光了就等于0了，此时应该输出已选择的组合
         if(n == 0){
             System.out.println(selected.toString());
             return;
@@ -25,11 +26,11 @@ public class Combinations {
             return;
         }
 
-        // 选择第0个元素
+        // 选择第0个元素，那就需要从剩下的元素中再选择 n - 1 个元素
         selected.add(data.get(0));
         combinations(selected, data.subList(1, data.size()), n - 1);
 
-        // 不选择第0个元素
+        // 不选择第0个元素，那就需要从剩下的元素中选择 n 个元素
         selected.remove(selected.size() - 1);
         combinations(selected, data.subList(1, data.size()), n);
     }

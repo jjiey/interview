@@ -21,14 +21,25 @@ public class MergeTwoSortedArray {
             return array1;
         }
         int[] result = new int[array1.length + array2.length];
-        int border = array1.length - 1;
         for (int i = 0, j = 0, k = 0; i < result.length; i++) {
-            if (j <= border && array1[j] < array2[k]) {
-                result[i] = array1[j];
-                j ++;
+            if (j == array1.length) {
+                while (k < array2.length) {
+                    result[i++] = array2[k++];
+                }
+                break;
+            } else if (k == array2.length) {
+                while (j < array1.length) {
+                    result[i++] = array1[j++];
+                }
+                break;
             } else {
-                result[i] = array2[k];
-                k ++;
+                if (array1[j] < array2[k]) {
+                    result[i] = array1[j];
+                    j++;
+                } else {
+                    result[i] = array2[k];
+                    k++;
+                }
             }
         }
         return result;

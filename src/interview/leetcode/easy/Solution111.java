@@ -8,7 +8,6 @@ import java.util.Queue;
 /**
  * Minimum Depth of Binary Tree
  * 二叉树的最小深度
- * 输入是层序遍历结果
  */
 public class Solution111 {
 
@@ -61,9 +60,9 @@ public class Solution111 {
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         while (!q.isEmpty()) {
+            minDepth ++;
             // 当前层的总长度
             int levelSize = q.size();
-            minDepth ++;
             for (int i = 0; i < levelSize; i++) {
                 TreeNode currNode = q.poll();
                 // 如果是叶子节点, 直接返回此时的minDepth

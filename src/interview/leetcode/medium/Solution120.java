@@ -34,7 +34,7 @@ public class Solution120 {
      */
     private int minimumTotal(List<List<Integer>> triangle) {
         int[] mini = new int[triangle.size()];
-        // mini最后一行赋值为triangle最后一行
+        // 初始值：mini最后一行赋值为triangle最后一行的值
         List<Integer> lastRow = triangle.get(triangle.size() - 1);
         for (int i = 0; i < lastRow.size(); i++) {
             mini[i] = lastRow.get(i);
@@ -54,19 +54,40 @@ public class Solution120 {
      */
     private int minimumTotal2(List<List<Integer>> triangle) {
         int[][] mini = new int[triangle.size()][triangle.size()];
-        // mini最后一行赋值为triangle最后一行
+        // 初始值：mini最后一行赋值为triangle最后一行的值
         List<Integer> lastRow = triangle.get(triangle.size() - 1);
         for (int i = 0; i < lastRow.size(); i++) {
             mini[triangle.size() - 1][i] = lastRow.get(i);
         }
         // 开始递推, triangle.size() - 2从倒数第二层开始
         for (int i = triangle.size() - 2; i >= 0; i--) {
+            // 拿到上一层的所有值
             List<Integer> tempRow = triangle.get(i);
             for (int j = 0; j < tempRow.size(); j++) {
+                // 下一层的最小值加上上一层的值
                 mini[i][j] = Math.min(mini[i + 1][j], mini[i + 1][j + 1]) + tempRow.get(j);
             }
         }
         return mini[0][0];
+    }
+
+    private int rowAll;
+    /**
+     * 递归
+     */
+    private int minimumTotal3(List<List<Integer>> triangle) {
+        rowAll = triangle.size();
+        return minimumTotalHelper(triangle, 0, 0);
+    }
+
+    private int minimumTotalHelper(List<List<Integer>> triangle, int row, int col) {
+        // 如果到最后一行
+        if (row == rowAll - 1){
+            return triangle.get(row).get(col);
+        }
+        int left = minimumTotalHelper(triangle, row + 1, col);
+        int right = minimumTotalHelper(triangle, row + 1, col + 1);
+        return Math.min(left, right) + triangle.get(row).get(col);
     }
 
     private List<List<Integer>> createTriangle() {

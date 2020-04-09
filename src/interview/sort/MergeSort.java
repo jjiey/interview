@@ -20,7 +20,8 @@ public class MergeSort {
 		if (left >= right) {
 			return;
 		}
-		int mid = left + (right - left) / 2; // int mid = (left + right) / 2;
+		// int mid = (left + right) / 2;
+		int mid = left + (right - left) / 2;
 		mergeSort(data, left, mid);
 		mergeSort(data, mid + 1, right);
 		System.out.println(Arrays.toString(data) + " , " + left + " , " + mid + " , " + right);

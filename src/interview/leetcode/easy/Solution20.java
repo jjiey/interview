@@ -18,7 +18,7 @@ public class Solution20 {
     private boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         // 技术处理: K - 右部分 V - 左部分
-        Map<Character, Character> parenMap = new HashMap<Character, Character>() {{
+        Map<Character, Character> parenMap = new HashMap<Character, Character>(3) {{
             put(')', '(');
             put(']', '[');
             put('}', '{');
@@ -29,7 +29,7 @@ public class Solution20 {
             // 说明是左半部分直接入栈, 否则进行判断
             if (!parenMapKeys.contains(c)) {
                 stack.push(c);
-            } else if (stack.isEmpty() || parenMap.get(c) != stack.pop()) {
+            } else if (stack.isEmpty() || !Objects.equals(parenMap.get(c), stack.pop())) {
                 return false;
             }
         }
