@@ -55,7 +55,7 @@ public class Solution19 {
         ListNode first = dummyHead;
         ListNode second = dummyHead;
         // first和second中间相隔n个，因为second最后得是删除节点的前一个节点，才能跳过要删除的节点指向要删除节点的下一个节点
-        for (int i = 0; i < n + 1; i++) {
+        for (int i = 0; i <= n; i++) {
             first = first.next;
         }
         while (first != null) {

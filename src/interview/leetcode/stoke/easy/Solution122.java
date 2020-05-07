@@ -32,28 +32,41 @@ public class Solution122 {
         return max;
     }
 
+    /**
+     * dfs
+     */
     private int maxProfit2(int[] prices) {
         return calculate(prices, 0);
     }
 
     private int calculate(int[] prices, int s) {
-        if (s >= prices.length)
+        if (s >= prices.length) {
             return 0;
-        int max = 0, maxProfit;
+        }
+        int max = 0, maxProfit, profit;
         for (int start = s; start < prices.length; start++) {
             maxProfit = 0;
             for (int i = start + 1; i < prices.length; i++) {
                 // 如果前一天的股价 < 后一天的股价，才考虑卖出
                 if (prices[start] < prices[i]) {
                     // 收益 = （i + 1天的收益） + i天卖出后的收益
-                    int profit = calculate(prices, i + 1) + prices[i] - prices[start];
-                    if (profit > maxProfit)
+                    profit = calculate(prices, i + 1) + prices[i] - prices[start];
+                    if (profit > maxProfit) {
                         maxProfit = profit;
+                    }
                 }
             }
-            if (maxProfit > max)
+            if (maxProfit > max) {
                 max = maxProfit;
+            }
         }
         return max;
+    }
+
+    /**
+     * dp，思路参考Solution188
+     */
+    private int maxProfit3(int[] prices) {
+        return 0;
     }
 }

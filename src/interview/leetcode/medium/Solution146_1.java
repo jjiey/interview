@@ -23,19 +23,19 @@ public class Solution146_1 {
 
     class LRUCache {
 
-        private int cap;
+        private int capacity;
         // 保持插入顺序
         private Map<Integer, Integer> map = new LinkedHashMap<>();
 
         public LRUCache(int capacity) {
-            this.cap = capacity;
+            this.capacity = capacity;
         }
 
         public int get(int key) {
             if (map.keySet().contains(key)) {
                 int value = map.get(key);
                 map.remove(key);
-                // 保证每次查询后，都在末尾
+                // 保证每次查询后，都在链表末尾
                 map.put(key, value);
                 return value;
             }
@@ -45,16 +45,14 @@ public class Solution146_1 {
         public void put(int key, int value) {
             if (map.keySet().contains(key)) {
                 map.remove(key);
-            } else if (map.size() == cap) {
+            } else if (capacity == map.size()) {
+                // map.remove(map.entrySet().iterator().next().getKey());
                 Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
                 iterator.next();
                 iterator.remove();
-
-                // int firstKey = map.entrySet().iterator().next().getValue();
-                // map.remove(firstKey);
             }
+            // 保证每次查询后，都在链表末尾
             map.put(key, value);
         }
     }
-
 }

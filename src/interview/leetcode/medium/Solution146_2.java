@@ -21,42 +21,35 @@ public class Solution146_2 {
 
     class LRUCache {
 
-        private int cap;
+        private int capacity;
+        // 维护缓存内容
         private Map<Integer, Integer> map = new HashMap<>();
+        // 维护key顺序
         private List<Integer> list = new LinkedList<>();
 
         public LRUCache(int capacity) {
-            this.cap = capacity;
+            this.capacity = capacity;
         }
 
         public int get(int key) {
-            Integer temp = map.get(key);
-            if (temp == null) {
+            Integer value = map.get(key);
+            if (value == null) {
                 return -1;
             }
-            list.remove((Integer) key);
+            list.remove(key);
             list.add(key);
-            return temp;
+            return value;
         }
 
         public void put(int key, int value) {
             if (map.get(key) != null) {
-                map.put(key, value);
                 list.remove((Integer) key);
-                list.add(key);
-            } else {
-                if (cap != map.size()) {
-                    list.add(key);
-                    map.put(key, value);
-                } else {
-                    Integer x = list.get(0);
-                    map.remove(x);
-                    list.remove(0);
-                    map.put(key, value);
-                    list.add(key);
-                }
+            } else if (capacity == map.size()) {
+                map.remove(list.get(0));
+                list.remove(0);
             }
+            map.put(key, value);
+            list.add(key);
         }
     }
-
 }

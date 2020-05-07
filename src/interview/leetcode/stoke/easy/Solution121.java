@@ -1,5 +1,7 @@
 package interview.leetcode.stoke.easy;
 
+import java.util.Objects;
+
 /**
  * Best Time to Buy and Sell Stock
  * 买卖股票的最佳时机
@@ -27,5 +29,24 @@ public class Solution121 {
             }
         }
         return res;
+    }
+
+    /**
+     * dp，思路参考Solution188
+     */
+    private int maxProfit2(int[] prices) {
+        if (Objects.isNull(prices) || prices.length == 0) {
+            return 0;
+        }
+        int[][][] dp = new int[prices.length][2][2];
+        dp[0][0][0] = dp[0][1][0] = 0;
+        dp[0][0][1] = -prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            dp[i][0][0] = dp[i - 1][0][0];
+            dp[i][0][1] = Math.max(dp[i - 1][0][1], dp[i - 1][0][0] - prices[i]);
+            dp[i][1][0] = Math.max(dp[i - 1][1][0], dp[i - 1][0][1] + prices[i]);
+            dp[i][1][1] = Math.max(dp[i - 1][1][1], dp[i - 1][1][0] - prices[i]);
+        }
+        return Math.max(dp[prices.length - 1][0][0], dp[prices.length - 1][1][0]);
     }
 }

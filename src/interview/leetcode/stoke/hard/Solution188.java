@@ -1,5 +1,7 @@
 package interview.leetcode.stoke.hard;
 
+import java.util.Objects;
+
 /**
  * Best Time to Buy and Sell Stock IV
  * 买卖股票的最佳时机 IV
@@ -18,22 +20,22 @@ public class Solution188 {
     }
 
     /**
-     * 买卖一次算一次交易，买入时交易次数不变，卖出时增加交易次数
+     * 买卖一次才算一次交易，买入时交易次数不变，卖出时交易次数增加
      *
-     * 状态：
-     * dp[i][k][j]
-     * i：第i天
-     * k：代表之前交易的次数
-     * j：0代表当天不持有股票（只能买）；1代表当天持有股票（只能卖）
+     * 状态：dp[i][k][j]
+     * i：天数，第i天
+     * k：到目前为止的交易次数
+     * j：当前手里股票的持有状态。0代表不持有股票（只能买，交易次数不变）；1代表持有股票（只能卖，交易次数增加）
      *
-     * 第i天交易k次没有股票，有两种情况：前一天交易k次没有股票，前一天交易k - 1次有股票今天卖掉（增加交易次数），即
+     * 状态转移方程：
+     * 第i天-到目前为止交易k次-手里没有股票，对应两种情况：前一天-到前一天为止交易k次-手里没有股票，前一天-到前一天为止交易(k - 1)次-手里有股票但今天卖掉了（增加交易次数），即
      *     dp[i, k, 0] = max(dp[i - 1, k, 0], dp[i - 1, k - 1, 1] + prices[i])
-     * 第i天交易k次有股票，有两种情况：前一天交易k次有股票，前一天交易k次没有股票今天买入（不增加交易次数），即
+     * 第i天-到目前为止交易k次-手里有股票，对应两种情况：前一天-到前一天为止交易k次-手里有股票，前一天-到前一天为止交易k次-手里没有股票但今天买入了（不增加交易次数），即
      *     dp[i, k, 1] = max(dp[i - 1, k, 1], dp[i - 1, k, 0] - prices[i])
      * 最终结果：max( dp[n - 1, {0 ~ k}, 0] )
      */
     private int maxProfit(int k, int[] prices) {
-        if (prices == null || prices.length == 0) {
+        if (Objects.isNull(prices) || prices.length == 0) {
             return 0;
         }
         /*
@@ -44,21 +46,22 @@ public class Solution188 {
             return greedy(prices);
         }
         int[][][] dp = new int[prices.length][k + 1][2];
-        // 第一天为初始值
+        // base case：第一天情况
         for (int i = 0; i <= k; i++) {
-            // 第 1 天交易 k 次后没有股票，初始值为 0
+            // 第 1 天交易 k 次后手里没有股票，收益为 0
             dp[0][i][0] = 0;
-            // 第 1 天交易 k 次后有股票，初始值为 -prices[0]
+            // 第 1 天交易 k 次后手里有股票，收益为 -prices[0]
             dp[0][i][1] = -prices[0];
         }
-        // 从第一天开始循环
+        // 从第二天开始循环
         for (int i = 1; i < prices.length; i++) {
             for (int j = 0; j <= k; j++) {
-                // 防止 j - 1 出错
+                // j = 0：今天没交易手里没有股票的情况 = 昨天手里没有股票的情况
                 dp[i][j][0] = j != 0 ? Math.max(dp[i - 1][j][0], dp[i - 1][j - 1][1] + prices[i]) : dp[i - 1][j][0];
                 dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i - 1][j][0] - prices[i]);
             }
         }
+        // 寻找max( dp[n - 1, {0 ~ k}, 0] )
         int max = Integer.MIN_VALUE;
         for (int i = 0; i <= k; i++) {
             max = Math.max(max, dp[prices.length - 1][i][0]);
@@ -77,12 +80,9 @@ public class Solution188 {
     }
 
     /**
-     * dp同上边k和j交换位置
+     * 把上边的dp中k和j交换位置的实现
      */
     private int maxProfit2(int k, int[] prices) {
-        if (prices == null || prices.length == 0) {
-            return 0;
-        }
         if (k >= prices.length / 2) {
             return greedy(prices);
         }

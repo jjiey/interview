@@ -41,7 +41,5 @@ public class Solution146_3 {
             }
             return super.get(key);
         }
-
     }
-
 }
