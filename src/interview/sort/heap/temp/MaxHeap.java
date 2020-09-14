@@ -19,7 +19,7 @@ public class MaxHeap {
         /**/
 //        MaxHeap heap = new MaxHeap(data);
         for (int i : data) {
-            System.out.print(heap.delete() + ", ");
+            System.out.print(heap.getMax() + ", ");
         }
     }
 
@@ -45,58 +45,103 @@ public class MaxHeap {
     }
 
     public MaxHeap(int[] data) {
-        int len = data.length;
+        this(data, data.length);
+    }
+
+    public MaxHeap(int[] data, int len) {
         this.data = new int[len];
-        System.arraycopy(data, 0, this.data, 0, data.length);
         this.capacity = len;
         this.count = len;
+        System.arraycopy(data, 0, this.data, 0, data.length);
         // 从最后一个非叶子节点开始 shiftDown
         for (int i = (len - 2) / 2; i >= 0; i--) {
-            shiftDown(i);
+            shiftDown2(i);
         }
     }
 
-    public void insert(int t) {
-        // todo 此处可以实现为动态扩容，会更友好些，大家可以自己去实现
-        assert count <= capacity;
-        data[count] = t;
-        shiftUp(count);
-        count++;
+    /**
+     * 返回堆中的元素个数
+     * @return 堆中的元素个数
+     */
+    public int size() {
+        return count;
     }
 
-    // todo 优化 不一直swap
+    /**
+     * 返回一个布尔值, 表示堆中是否为空
+     * @return true 表示堆为空
+     */
+    public boolean isEmpty() {
+        return count == 0;
+    }
+
+    /**
+     * 堆中插入一个元素
+     * @param i 插入的元素
+     */
+    public void insert(int i) {
+        // todo 此处可以实现为动态扩容，会更友好些，大家可以自己去实现
+        assert this.count < this.capacity;
+        // 插入位置为堆的最后一个位置
+        this.data[this.count] = i;
+        // 对新插入节点做 shiftUp
+        shiftUp2(this.count);
+        this.count++;
+    }
+
     private void shiftUp(int i) {
         // i 父节点的索引
         int ip;
-        // i > 0 表示 i 不是根节点 && i 的父节点的值 < i 的值
-        while (i > 0 && data[ip = (i - 1) / 2] < data[i]) {
-            swap(ip, i);
+        // i 不是根节点 && i 的父节点的值 < i 节点的值
+        while (i > 0 && this.data[ip = (i - 1) / 2] < this.data[i]) {
+            swap(i, ip);
             i = ip;
         }
     }
 
-    public int delete(){
+    // 优化 shiftUp，不一直swap
+    private void shiftUp2(int i) {
+        int e = this.data[i];
+        // i 父节点的索引
+        int ip;
+        // i 不是根节点 && i 的父节点的值 < i 节点的值
+        while (i > 0 && this.data[ip = (i - 1) / 2] < e) {
+            this.data[ip] = this.data[i];
+            i = ip;
+        }
+        this.data[i] = e;
+    }
+
+    /**
+     * 获取堆中的最大值（从堆中删除一个元素）
+     * @return 堆中最大值
+     */
+    public int getMax() {
         // todo 此处可以实现为动态扩容，会更友好些，大家可以自己去实现
-        assert count >= 0;
-        int ret = data[0];
-        swap(0, count - 1);
-        count --;
-        shiftDown(0);
+        assert this.count >= 0;
+        int ret = this.data[0];
+        // 把堆中的最后一个节点临时补到堆顶
+        swap(0, this.count - 1);
+        this.count --;
+        // 对新的堆顶节点做 shiftDown
+        shiftDown2(0);
         return ret;
     }
 
-    // todo 优化 不一直swap
     private void shiftDown(int i) {
-        // while (k节点有左孩子)
-        while (2 * i + 1 <= count) {
-            // 在此轮循环中，data[k]和data[j]交换位置
-            int j = 2 * i + 1;
-            // 有右孩子且 右孩子大于左孩子
-            if (j + 1 < count && data[j + 1] > data[j]) {
-                j++;
+        // il 代表 i 节点的左孩子节点索引；ir 代表 i 节点的右孩子节点索引
+        int il, ir;
+        // while (i 节点有左孩子)
+        while ((il = 2 * i + 1) < this.count) {
+            // j 是 i 节点的两个孩子节点中最大值的索引，初始值为左孩子的索引
+            int j = il;
+            // 如果 i 节点还有右孩子 且 右孩子的值大于左孩子的值，j 更新为右孩子的索引
+            if ((ir = j + 1) < this.count && this.data[ir] > this.data[j]) {
+                j = ir;
             }
-            // data[j] 是孩子节点中的最大值，即父节点比孩子节点都大了
-            if(data[i] > data[j]) {
+            // 此时 data[j] 是 i 节点的两个孩子节点中的最大值
+            // 如果 i 节点的值大于等于 data[j]，结束循环
+            if(this.data[i] >= this.data[j]) {
                 break;
             }
             swap(i, j);
@@ -105,9 +150,32 @@ public class MaxHeap {
         }
     }
 
+    // 优化 shiftDown，不一直swap
+    private void shiftDown2(int i) {
+        int e = this.data[i];
+        int il, ir;
+        while ((il = 2 * i + 1) < this.count) {
+            int j = il;
+            if ((ir = j + 1) < this.count && this.data[ir] > this.data[j]) {
+                j = ir;
+            }
+            if(e >= this.data[j]) {
+                break;
+            }
+            this.data[i] = this.data[j];
+            i = j;
+        }
+        this.data[i] = e;
+    }
+
+    /**
+     * 交换堆数组中 i 和 j 索引位置的值
+     * @param i 待交换索引
+     * @param j 待交换索引
+     */
     private void swap(int i, int j) {
-        int temp = data[i];
-        data[i] = data[j];
-        data[j] = temp;
+        int temp = this.data[i];
+        this.data[i] = this.data[j];
+        this.data[j] = temp;
     }
 }

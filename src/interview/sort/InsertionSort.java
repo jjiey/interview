@@ -87,7 +87,7 @@ public class InsertionSort {
 			right = i - 1;
 			while (left <= right) {
 				// 这里计算 mid 没有用 (left + right) / 2 是为了防止溢出，这里也是以前jdk底层实现二分查找的一个bug，读者可以体会一下
-				mid = left + ((right - left) >> 1);
+				mid = (left + right) >>> 1;
 				if (data[mid] > e) {
 					right = mid - 1;
 				} else {
