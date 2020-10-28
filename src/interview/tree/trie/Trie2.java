@@ -1,29 +1,33 @@
-package interview.leetcode.medium;
+package interview.tree.trie;
 
 /**
- * Implement Trie (Prefix Tree)
- * 实现 Trie（前缀树）
- * 封装前
  * 数组实现
  */
-public class Solution208_2 {
+public class Trie2 {
 
     /**
-     * The root node.
+     * 根节点
      */
-    private final Node root;
+    private Node root;
 
     /**
-     * Initialize the data structure.
+     * Trie 中存储的单词数量
      */
-    public Solution208_2() {
+    private int size;
+
+    public Trie2() {
         root = new Node();
+        size = 0;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     /**
-     * Inserts a word into the trie.
+     * 向 Trie 中添加一个新的单词 word
      */
-    public void insert(String word) {
+    public void add(String word) {
         Node cur = root;
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
@@ -33,12 +37,12 @@ public class Solution208_2 {
             }
             cur = cur.next[index];
         }
-        cur.isEndingChar = true;
+        if (!cur.isWord) {
+            cur.isWord = true;
+            size++;
+        }
     }
 
-    /**
-     * search a prefix or whole key in trie and returns the node where search ends
-     */
     private Node searchPrefix(String word) {
         Node cur = root;
         for (int i = 0; i < word.length(); i++) {
@@ -53,35 +57,35 @@ public class Solution208_2 {
     }
 
     /**
-     * Returns if the word is in the trie.
+     * 查询单词 word 是否在 Trie 中
      */
-    public boolean search(String word) {
+    public boolean contains(String word) {
         Node node = searchPrefix(word);
-        return node != null && node.isEndingChar;
+        return node != null && node.isWord;
     }
 
     /**
-     * Returns if there is any word in the trie that starts with the given prefix.
+     * 查询是否在 Trie 中有单词以 word 为前缀
      */
-    public boolean startsWith(String word) {
+    public boolean isPrefix(String word) {
         Node node = searchPrefix(word);
         return node != null;
     }
 
-    private static class Node {
+    private class Node {
 
         /**
-         * 该节点是否是字符串的结尾
+         * 该节点是否是单词的结尾
          */
-        public boolean isEndingChar;
+        public boolean isWord;
 
         /**
          * 指向后续节点的指针
          */
         public Node[] next;
 
-        public Node(boolean isEndingChar) {
-            this.isEndingChar = isEndingChar;
+        public Node(boolean isWord) {
+            this.isWord = isWord;
             next = new Node[26];
         }
 

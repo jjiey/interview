@@ -6,10 +6,10 @@ import java.util.Map;
 /**
  * Implement Trie (Prefix Tree)
  * 实现 Trie（前缀树）
- * 封装前
+ * 封装后
  * HashMap 实现（或 TreeMap）
  */
-public class Solution208_1 {
+public class Solution208_3 {
 
     /**
      * The root node.
@@ -19,7 +19,7 @@ public class Solution208_1 {
     /**
      * Initialize the data structure.
      */
-    public Solution208_1() {
+    public Solution208_3() {
         root = new Node();
     }
 
@@ -27,30 +27,30 @@ public class Solution208_1 {
      * Inserts a word into the trie.
      */
     public void insert(String word) {
-        Node cur = root;
+        Node node = root;
         for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            if (!cur.next.containsKey(c)) {
-                cur.next.put(c, new Node());
+            char currentChar = word.charAt(i);
+            if (node.notContainsKey(currentChar)) {
+                node.put(currentChar, new Node());
             }
-            cur = cur.next.get(c);
+            node = node.get(currentChar);
         }
-        cur.isEndingChar = true;
+        node.setEndingChar();
     }
 
     /**
      * search a prefix or whole key in trie and returns the node where search ends
      */
     private Node searchPrefix(String word) {
-        Node cur = root;
+        Node node = root;
         for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            if (!cur.next.containsKey(c)) {
+            char curLetter = word.charAt(i);
+            if (node.notContainsKey(curLetter)) {
                 return null;
             }
-            cur = cur.next.get(c);
+            node = node.get(curLetter);
         }
-        return cur;
+        return node;
     }
 
     /**
@@ -58,14 +58,14 @@ public class Solution208_1 {
      */
     public boolean search(String word) {
         Node node = searchPrefix(word);
-        return node != null && node.isEndingChar;
+        return node != null && node.isEndingChar();
     }
 
     /**
      * Returns if there is any word in the trie that starts with the given prefix.
      */
-    public boolean startsWith(String word) {
-        Node node = searchPrefix(word);
+    public boolean startsWith(String prefix) {
+        Node node = searchPrefix(prefix);
         return node != null;
     }
 
@@ -74,12 +74,12 @@ public class Solution208_1 {
         /**
          * 该节点是否是字符串的结尾
          */
-        public boolean isEndingChar;
+        private boolean isEndingChar;
 
         /**
          * 指向后续节点的指针
          */
-        public Map<Character, Node> next;
+        private final Map<Character, Node> next;
 
         public Node(boolean isEndingChar) {
             this.isEndingChar = isEndingChar;
@@ -88,6 +88,30 @@ public class Solution208_1 {
 
         public Node() {
             this(false);
+        }
+
+        public boolean containsKey(char c) {
+            return next.containsKey(c);
+        }
+
+        public boolean notContainsKey(char c) {
+            return !next.containsKey(c);
+        }
+
+        public Node get(char c) {
+            return next.get(c);
+        }
+
+        public void put(char c, Node node) {
+            next.put(c, node);
+        }
+
+        public void setEndingChar() {
+            isEndingChar = true;
+        }
+
+        public boolean isEndingChar() {
+            return isEndingChar;
         }
     }
 }
