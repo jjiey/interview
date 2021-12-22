@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class Solution300 {
 
-    public static void main(String[] args) {
-        Solution300 lc = new Solution300();
-        int[] nums = new int[]{10, 9, 2, 5, 3, 7, 101, 18};
-//        int res = lc.lengthOfLIS(nums);
-        int res = lc.lengthOfLIS4(nums);
-        System.out.println(res);
-    }
+//    public static void main(String[] args) {
+//        Solution300 lc = new Solution300();
+//        int[] nums = new int[]{10, 9, 2, 5, 3, 7, 101, 18};
+////        int res = lc.lengthOfLIS(nums);
+//        int res = lc.lengthOfLIS4(nums);
+//        System.out.println(res);
+//    }
 
     /**
      * 暴力
@@ -88,49 +88,133 @@ public class Solution300 {
      */
     private int lengthOfLIS4(int[] nums) {
         List<Integer> lis = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (lis.isEmpty() || nums[i] > lis.get(lis.size() - 1)) {
-                lis.add(nums[i]);
+        for (int num : nums) {
+            if (lis.isEmpty() || num > lis.get(lis.size() - 1)) {
+                lis.add(num);
             } else {
-                int index = lowerBound(lis.toArray(new Integer[lis.size()]), 0, lis.size(), nums[i]);
-                lis.add(index, nums[i]);
+                int index = lowerBound(lis.toArray(new Integer[lis.size()]), num);
+                lis.add(index, num);
                 lis.remove(index + 1);
             }
         }
         return lis.size();
     }
 
-    private int lowerBound(Integer[] nums, int l, int r, int target) {
+    /**
+     * 利用二分法，求 nums 中第一个大于等于 target 的地址，不存在返回 nums 最后一个元素索引
+     * [l...r)
+     *
+     * 如果求 nums 中第一个小于 target 的地址，结果减 1 就可以了。注意如果查找的元素比第一个元素还要小，需要做特殊判断
+     */
+    private int lowerBound(Integer[] nums, int target) {
+        int len = nums.length, l = 0, r = len;
         while (l < r) {
-            int mid = l + (r - l) / 2;
+            int mid = (l + r) >>> 1;
             if (nums[mid] >= target) {
                 r = mid;
             } else {
                 l = mid +1;
             }
         }
-        return l;
+        return l < len ? l : len - 1;
     }
-    private int lowerBound2(int[] nums, int l, int r, int target) {
+
+    /**
+     * 利用二分法，求 nums 中第一个大于等于 target 的地址，不存在返回 nums 最后一个元素索引
+     * [l...r]
+     *
+     * 如果求 nums 中第一个小于 target 的地址，结果减 1 就可以了。注意如果查找的元素比第一个元素还要小，需要做特殊判断
+     */
+    private int lowerBound2(Integer[] nums, int target) {
+        int len = nums.length, l = 0, r = len - 1;
         while (l <= r) {
-            int mid = l + (r - l) / 2;
+            int mid = (l + r) >>> 1;
             if (nums[mid] >= target) {
                 r = mid - 1;
             } else {
                 l = mid + 1;
             }
         }
-        return l;
+        return l < len ? l : r;
     }
-    private int upperBound(int []nums ,int l,int r, int target) {
+
+    /**
+     * 利用二分法，求 nums 中第一个大于 target 的地址，不存在返回 nums 最后一个元素索引
+     * [l...r)
+     *
+     * 如果求 nums 中第一个小于等于 target 的地址，结果减 1 就可以了（有重复值不行）。注意如果查找的元素比第一个元素还要小，需要做特殊判断
+     */
+    private int upperBound(Integer[] nums, int target) {
+        int len = nums.length, l = 0, r = len;
         while (l < r) {
-            int mid = l + (r - l) / 2;
+            int mid = (l + r) >>> 1;
             if (nums[mid] <= target) {
                 l = mid + 1;
             } else {
                 r = mid;
             }
         }
-        return l;
+        return l < len ? l : len - 1;
+    }
+
+    /**
+     * 利用二分法，求 nums 中第一个大于 target 的地址，不存在返回 nums 最后一个元素索引
+     * [l...r]
+     *
+     * 如果求 nums 中第一个小于等于 target 的地址，结果减 1 就可以了（有重复值不行）。注意如果查找的元素比第一个元素还要小，需要做特殊判断
+     */
+    private int upperBound2(Integer[] nums, int target) {
+        int len = nums.length, l = 0, r = len - 1;
+        while (l <= r) {
+            int mid = (l + r) >>> 1;
+            if (nums[mid] <= target) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return l < len ? l : r;
+    }
+
+    public static void main(String[] args) {
+        Solution300 lc = new Solution300();
+        Integer[] aa = new Integer[]{1,1,2,2,3,3,5};
+//        System.out.println(lc.lowerBound(aa, 3));
+//        System.out.println(lc.lowerBound2(aa, 3));
+//        System.out.println(lc.upperBound(aa, 3));
+//        System.out.println(lc.upperBound2(aa, 3));
+
+//        System.out.println(lc.lengthOfLIS4Temp(new int[]{10,9,2,5,3,7,101,18}));
+    }
+
+    private int lengthOfLIS4Temp(int[] nums) {
+        int i = 0;
+        int[] temp = new int[nums.length];
+        for (int num : nums) {
+            if (i == 0 || num > temp[i - 1]) {
+                temp[i++] = num;
+            } else {
+                int index = Arrays.binarySearch(temp, 0, i, num);
+                if (index < 0) {
+                    index = -index;
+                }
+                if (index < nums.length) {
+                    temp[i++] = num;
+                    temp[i] = 0;
+                }
+            }
+        }
+        return temp[i - 1];
+//        List<Integer> lis = new ArrayList<>();
+//        for (int num : nums) {
+//            if (lis.isEmpty() || num > lis.get(lis.size() - 1)) {
+//                lis.add(num);
+//            } else {
+//                int index = lowerBound(lis.toArray(new Integer[lis.size()]), num);
+//                lis.add(index, num);
+//                lis.remove(index + 1);
+//            }
+//        }
+//        return lis.size();
     }
 }

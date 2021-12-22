@@ -29,11 +29,11 @@ public class Solution208_3 {
     public void insert(String word) {
         Node node = root;
         for (int i = 0; i < word.length(); i++) {
-            char currentChar = word.charAt(i);
-            if (node.notContainsKey(currentChar)) {
-                node.put(currentChar, new Node());
+            char curLetter = word.charAt(i);
+            if (node.notContainsKey(curLetter)) {
+                node.put(curLetter, new Node());
             }
-            node = node.get(currentChar);
+            node = node.get(curLetter);
         }
         node.setEndingChar();
     }

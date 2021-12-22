@@ -1,5 +1,8 @@
 package interview.leetcode.medium;
 
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 /**
  * Kth Largest Element in an Array
  * 数组中的第K个最大元素
@@ -14,18 +17,62 @@ public class Solution215 {
         int[] nums = new int[]{3, 2, 1, 5, 6, 4};
         int k = 2;
         Solution215 lc = new Solution215();
-        int res = lc.findKthLargest(nums, k);
+        int res = lc.findKthLargest4(nums, k);
         System.out.println(res);
     }
 
-    // 暴力
-    // 堆
-    // 快排
+    /**
+     * 暴力
+     */
+    private int findKthLargest2(int[] nums, int k) {
+        int len = nums.length, maxIndex, temp;
+        for (int i = 0; i <= k; i++) {
+            maxIndex = i;
+            for (int j = i + 1; j < len; j++) {
+                if (nums[j] > nums[maxIndex]) {
+                    maxIndex = j;
+                }
+            }
+            if (maxIndex > i) {
+                // swap count and maxIndex
+                temp = nums[i];
+                nums[i] = nums[maxIndex];
+                nums[maxIndex] = temp;
+            }
+        }
+        return nums[k - 1];
+    }
 
+    /**
+     * 排序
+     */
+    private int findKthLargest3(int[] nums, int k) {
+        Arrays.sort(nums);
+        return nums[nums.length - k];
+    }
+
+    /**
+     * 堆
+     */
+    private int findKthLargest4(int[] nums, int k) {
+        // 小顶堆，k + 1 防止没必要的扩容
+        PriorityQueue<Integer> heap = new PriorityQueue<>(k + 1);
+        for (int n: nums) {
+            heap.add(n);
+            // 保证小顶堆中只有 k 个元素
+            if (heap.size() > k) {
+                // 去掉最小值
+                heap.poll();
+            }
+        }
+        // 直接返回堆顶元素
+        return heap.poll();
+    }
+
+    /**
+     * 三路快排
+     */
     private int findKthLargest(int[] nums, int k) {
-//        if (k > nums.length) {
-//            return -1;
-//        }
         return findKthLargestHelper(nums, 0, nums.length - 1, nums.length - k);
         // 在未排序的数组中找到排好序的第 k 个元素
 //        return findKthLargestHelper(nums, 0, nums.length - 1, k - 1);
@@ -63,43 +110,4 @@ public class Solution215 {
             return pivot;
         }
     }
-
-//    private int findKthLargest(int[] nums, int k) {
-//        quickSort(nums, 0, nums.length - 1, nums.length - k);
-//        return 0;
-//    }
-//
-//    private void quickSort(int[] data, int left, int right, int k) {
-//        if (left >= right) {
-//            return;
-//        }
-//        int pivotIndex = partition(data, left, right);
-//        if (pivotIndex == k) {
-//            System.out.println(data[pivotIndex]);
-//        }
-//        quickSort(data, left, pivotIndex - 1, k);
-//        quickSort(data, pivotIndex + 1, right, k);
-//    }
-//
-//    private int partition(int[] data, int left, int right) {
-//        int ll = left;
-//        int rr = right;
-//        int pivot = data[left];
-//        while (ll != rr) {
-//            while (ll < rr && data[rr] > pivot) {
-//                rr --;
-//            }
-//            while (ll < rr && data[ll] <= pivot) {
-//                ll ++;
-//            }
-//            if (ll < rr) {
-//                int temp = data[rr];
-//                data[rr] = data[ll];
-//                data[ll] = temp;
-//            }
-//        }
-//        data[left] = data[ll];
-//        data[ll] = pivot;
-//        return ll;
-//    }
 }
